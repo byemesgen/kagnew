@@ -75,9 +75,7 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
     }
   };
 
-  const amountLabel = isRecurring
-    ? `$${(amountCents / 100).toFixed(0)}/mo`
-    : `$${(amountCents / 100).toFixed(0)}`;
+  const amountLabel = `$${(amountCents / 100).toFixed(0)}`;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
