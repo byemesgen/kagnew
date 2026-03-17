@@ -25,9 +25,11 @@ export type Database = {
           donor_name: string | null
           id: string
           is_anonymous: boolean | null
+          is_recurring: boolean | null
           message: string | null
           status: string
           stripe_payment_id: string | null
+          stripe_subscription_id: string | null
           tier: string | null
         }
         Insert: {
@@ -40,9 +42,11 @@ export type Database = {
           donor_name?: string | null
           id?: string
           is_anonymous?: boolean | null
+          is_recurring?: boolean | null
           message?: string | null
           status?: string
           stripe_payment_id?: string | null
+          stripe_subscription_id?: string | null
           tier?: string | null
         }
         Update: {
@@ -55,9 +59,11 @@ export type Database = {
           donor_name?: string | null
           id?: string
           is_anonymous?: boolean | null
+          is_recurring?: boolean | null
           message?: string | null
           status?: string
           stripe_payment_id?: string | null
+          stripe_subscription_id?: string | null
           tier?: string | null
         }
         Relationships: []
