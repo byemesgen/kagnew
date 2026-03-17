@@ -4,6 +4,10 @@ import { TierSelector } from '@/components/donate/TierSelector';
 import { DonationForm } from '@/components/donate/DonationForm';
 import { DonationSuccess } from '@/components/donate/DonationSuccess';
 import { DonorWall } from '@/components/donate/DonorWall';
+import { FundraisingProgress } from '@/components/donate/FundraisingProgress';
+import { SocialProofTicker } from '@/components/donate/SocialProofTicker';
+import { ExitIntentBar } from '@/components/donate/ExitIntentBar';
+import { MobileStickyDonate } from '@/components/donate/MobileStickyDonate';
 
 export default function DonatePage() {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
@@ -34,7 +38,7 @@ export default function DonatePage() {
           ) : (
             <>
               {/* Hero copy */}
-              <div className="text-center mb-14">
+              <div id="donate-hero" className="text-center mb-14">
                 <p className="font-space-mono text-xs uppercase tracking-[0.35em] text-primary mb-4">
                   Support the Film
                 </p>
@@ -49,6 +53,9 @@ export default function DonatePage() {
                 </p>
               </div>
 
+              {/* Fundraising progress */}
+              <FundraisingProgress />
+
               {/* Tier selector */}
               <div className="mb-12">
                 <TierSelector
@@ -61,13 +68,18 @@ export default function DonatePage() {
                 />
               </div>
 
+              {/* Social proof ticker */}
+              <SocialProofTicker />
+
               {/* Donation form */}
-              <DonationForm
-                selectedTier={selectedTier}
-                amountCents={amountCents}
-                isRecurring={isRecurring}
-                onSuccess={setSuccessData}
-              />
+              <div id="donation-form">
+                <DonationForm
+                  selectedTier={selectedTier}
+                  amountCents={amountCents}
+                  isRecurring={isRecurring}
+                  onSuccess={setSuccessData}
+                />
+              </div>
             </>
           )}
 
@@ -75,6 +87,10 @@ export default function DonatePage() {
           <DonorWall />
         </div>
       </main>
+
+      {/* Conversion overlays */}
+      <ExitIntentBar />
+      <MobileStickyDonate />
     </div>
   );
 }
