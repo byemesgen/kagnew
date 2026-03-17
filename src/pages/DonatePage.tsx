@@ -8,6 +8,7 @@ import { FundraisingProgress } from '@/components/donate/FundraisingProgress';
 import { SocialProofTicker } from '@/components/donate/SocialProofTicker';
 import { ExitIntentBar } from '@/components/donate/ExitIntentBar';
 import { MobileStickyDonate } from '@/components/donate/MobileStickyDonate';
+import { Footer } from '@/components/Footer';
 
 export default function DonatePage() {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
