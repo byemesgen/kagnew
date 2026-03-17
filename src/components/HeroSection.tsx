@@ -34,7 +34,7 @@ export function HeroSection() {
           A Documentary Film · In Production
         </p>
         <div
-          className="mb-4 opacity-0 animate-fade-up-in"
+          className="mb-4 opacity-0 animate-fade-up-in flex justify-center"
           style={{ animationDelay: '0.4s' }}>
           <img src={kagnewLogo} alt="Kagnew" className="h-[44px] md:h-[72px] w-auto" />
         </div>
