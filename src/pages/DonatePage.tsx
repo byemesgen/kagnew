@@ -65,6 +65,9 @@ export default function DonatePage() {
               />
             </>
           )}
+
+          {/* Donor Wall — always visible */}
+          <DonorWall />
         </div>
       </main>
     </div>
