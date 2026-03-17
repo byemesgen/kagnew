@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import DonatePage from "./pages/DonatePage.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDonations from "./pages/AdminDonations.tsx";
+import AdminResetPassword from "./pages/AdminResetPassword.tsx";
 import { AdminRoute } from "./components/admin/AdminRoute.tsx";
 import "./index.css";
 
@@ -13,6 +14,7 @@ createRoot(document.getElementById("root")!).render(
       <Route path="/" element={<App />} />
       <Route path="/donate" element={<DonatePage />} />
       <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin/reset-password" element={<AdminResetPassword />} />
       <Route
         path="/admin/donations"
         element={

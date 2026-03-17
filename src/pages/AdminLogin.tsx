@@ -7,7 +7,8 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [mode, setMode] = useState<'login' | 'signup'>('login');
+  const [mode, setMode] = useState<'login' | 'signup' | 'reset'>('login');
+  const [resetSent, setResetSent] = useState(false);
   const [signupSuccess, setSignupSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -71,6 +72,25 @@ export default function AdminLogin() {
     setLoading(false);
   };
 
+  const handleReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/admin/reset-password`,
+    });
+
+    if (resetError) {
+      setError(resetError.message);
+      setLoading(false);
+      return;
+    }
+
+    setResetSent(true);
+    setLoading(false);
+  };
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
@@ -79,7 +99,7 @@ export default function AdminLogin() {
             KAGNEW Admin
           </p>
           <h1 className="font-source-serif text-3xl text-foreground">
-            {mode === 'login' ? 'Sign In' : 'Create Account'}
+            {mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Reset Password'}
           </h1>
         </div>
 
@@ -95,9 +115,24 @@ export default function AdminLogin() {
               Back to Sign In
             </button>
           </div>
+        ) : resetSent ? (
+          <div className="text-center space-y-4">
+            <p className="font-source-serif text-foreground">
+              If an account exists for that email, a reset link has been sent. Check your inbox.
+            </p>
+            <button
+              onClick={() => { setMode('login'); setResetSent(false); setError(null); }}
+              className="font-space-mono text-xs uppercase tracking-widest text-primary hover:underline"
+            >
+              Back to Sign In
+            </button>
+          </div>
         ) : (
           <>
-            <form onSubmit={mode === 'login' ? handleLogin : handleSignup} className="space-y-5">
+            <form
+              onSubmit={mode === 'login' ? handleLogin : mode === 'signup' ? handleSignup : handleReset}
+              className="space-y-5"
+            >
               <div>
                 <label className="font-space-mono text-xs uppercase tracking-widest text-muted-foreground mb-2 block">
                   Email
@@ -111,20 +146,23 @@ export default function AdminLogin() {
                   placeholder="admin@example.com"
                 />
               </div>
-              <div>
-                <label className="font-space-mono text-xs uppercase tracking-widest text-muted-foreground mb-2 block">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  minLength={6}
-                  className="w-full rounded-md border border-border bg-card px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="••••••••"
-                />
-              </div>
+
+              {mode !== 'reset' && (
+                <div>
+                  <label className="font-space-mono text-xs uppercase tracking-widest text-muted-foreground mb-2 block">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    minLength={6}
+                    className="w-full rounded-md border border-border bg-card px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    placeholder="••••••••"
+                  />
+                </div>
+              )}
 
               {error && (
                 <div className="rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3">
@@ -138,13 +176,22 @@ export default function AdminLogin() {
                 className="w-full bg-primary text-primary-foreground font-space-mono text-sm uppercase tracking-[0.15em] py-3 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-40"
               >
                 {loading
-                  ? (mode === 'login' ? 'Signing in…' : 'Creating account…')
-                  : (mode === 'login' ? 'Sign In' : 'Create Account')
+                  ? (mode === 'login' ? 'Signing in…' : mode === 'signup' ? 'Creating account…' : 'Sending…')
+                  : (mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Send Reset Link')
                 }
               </button>
             </form>
 
-            <p className="text-center mt-6 font-source-serif text-sm text-muted-foreground">
+            {mode === 'login' && (
+              <button
+                onClick={() => { setMode('reset'); setError(null); }}
+                className="block mx-auto mt-3 font-source-serif text-sm text-muted-foreground hover:text-primary hover:underline"
+              >
+                Forgot password?
+              </button>
+            )}
+
+            <p className="text-center mt-4 font-source-serif text-sm text-muted-foreground">
               {mode === 'login' ? (
                 <>
                   Need an account?{' '}
@@ -154,7 +201,7 @@ export default function AdminLogin() {
                 </>
               ) : (
                 <>
-                  Already have an account?{' '}
+                  Back to{' '}
                   <button onClick={() => { setMode('login'); setError(null); }} className="text-primary hover:underline">
                     Sign in
                   </button>
