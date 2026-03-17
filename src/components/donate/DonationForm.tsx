@@ -8,11 +8,10 @@ import { supabase } from '@/integrations/supabase/client';
 interface DonationFormProps {
   selectedTier: string | null;
   amountCents: number;
-  isRecurring: boolean;
-  onSuccess: (data: { name: string; email: string; amount: number; isAnonymous: boolean; isRecurring: boolean }) => void;
+  onSuccess: (data: { name: string; email: string; amount: number; isAnonymous: boolean }) => void;
 }
 
-export function DonationForm({ selectedTier, amountCents, isRecurring, onSuccess }: DonationFormProps) {
+export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState(false);
@@ -47,7 +46,7 @@ export function DonationForm({ selectedTier, amountCents, isRecurring, onSuccess
           display_amount: displayAmount,
           message: message.trim() || null,
           tier: selectedTier,
-          is_recurring: isRecurring,
+          is_recurring: false,
         },
       });
 
@@ -68,7 +67,6 @@ export function DonationForm({ selectedTier, amountCents, isRecurring, onSuccess
         email: email.trim(),
         amount: amountCents / 100,
         isAnonymous: !displayName,
-        isRecurring,
       });
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');
@@ -77,9 +75,7 @@ export function DonationForm({ selectedTier, amountCents, isRecurring, onSuccess
     }
   };
 
-  const amountLabel = isRecurring
-    ? `$${(amountCents / 100).toFixed(0)}/mo`
-    : `$${(amountCents / 100).toFixed(0)}`;
+  const amountLabel = `$${(amountCents / 100).toFixed(0)}`;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -120,7 +116,7 @@ export function DonationForm({ selectedTier, amountCents, isRecurring, onSuccess
           💳 Payment Element
         </p>
         <p className="font-source-serif text-sm text-foreground/50 mt-2 italic">
-          {isRecurring ? 'Stripe subscription will be connected here' : 'Stripe integration will be connected here'}
+          Stripe integration will be connected here
         </p>
       </div>
 
