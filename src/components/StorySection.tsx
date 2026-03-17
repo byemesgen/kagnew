@@ -1,6 +1,7 @@
 const stats = [
   { number: '6,037', label: 'Ethiopian soldiers deployed' },
   { number: '253', label: 'Battles fought — zero prisoners taken' },
+  { number: '0', label: 'Ethiopian soldier casualties' },
   { number: '~200', label: 'Survivors still living today' },
 ];
 
