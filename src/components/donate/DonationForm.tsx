@@ -187,6 +187,9 @@ export function DonationForm({ selectedTier, amountCents, isRecurring, onSuccess
         </div>
       )}
 
+      {/* Trust signals */}
+      <TrustSignals />
+
       {/* Submit */}
       <button
         type="submit"
