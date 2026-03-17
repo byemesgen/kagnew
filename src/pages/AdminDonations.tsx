@@ -36,6 +36,11 @@ export default function AdminDonations() {
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
 
+  // Goal settings
+  const [goalDollars, setGoalDollars] = useState('');
+  const [goalSaving, setGoalSaving] = useState(false);
+  const [goalSaved, setGoalSaved] = useState(false);
+
   const fetchDonations = async () => {
     const { data } = await supabase
       .from('donations')
