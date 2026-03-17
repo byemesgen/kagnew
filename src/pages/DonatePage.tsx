@@ -3,6 +3,7 @@ import { Navigation } from '@/components/Navigation';
 import { TierSelector } from '@/components/donate/TierSelector';
 import { DonationForm } from '@/components/donate/DonationForm';
 import { DonationSuccess } from '@/components/donate/DonationSuccess';
+import { DonorWall } from '@/components/donate/DonorWall';
 
 export default function DonatePage() {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
