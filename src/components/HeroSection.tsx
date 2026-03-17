@@ -1,3 +1,5 @@
+import kagnewLogo from '@/assets/kagnew-logo.svg';
+
 export function HeroSection() {
   return (
     <section
