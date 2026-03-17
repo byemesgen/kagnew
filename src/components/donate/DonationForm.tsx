@@ -46,7 +46,7 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
           display_amount: displayAmount,
           message: message.trim() || null,
           tier: selectedTier,
-          is_recurring: isRecurring,
+          is_recurring: false,
         },
       });
 
