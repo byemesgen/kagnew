@@ -3,10 +3,27 @@ export function HeroSection() {
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center film-grain overflow-hidden"
-      style={{
-        background: 'radial-gradient(ellipse at center, hsl(42 52% 54% / 0.06) 0%, hsl(30 27% 3%) 70%)',
-      }}
     >
+      {/* Vimeo background video */}
+      <div className="absolute inset-0 z-0">
+        <iframe
+          src="https://player.vimeo.com/video/1174454675?h=fd3f56db7c&background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0"
+          className="absolute top-1/2 left-1/2 w-[177.78vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2"
+          style={{ border: 'none' }}
+          allow="autoplay; fullscreen"
+          title="KAGNEW background video"
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-background/70" />
+        {/* Radial glow */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, hsl(42 52% 54% / 0.06) 0%, transparent 70%)',
+          }}
+        />
+      </div>
+
       <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
         <p
           className="font-space-mono text-xs uppercase tracking-[0.35em] text-primary mb-6 opacity-0 animate-fade-up-in"
