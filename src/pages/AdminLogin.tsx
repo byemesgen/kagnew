@@ -101,7 +101,6 @@ export default function AdminLogin() {
           <h1 className="font-source-serif text-3xl text-foreground">
             {mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Reset Password'}
           </h1>
-          </h1>
         </div>
 
         {signupSuccess ? (
