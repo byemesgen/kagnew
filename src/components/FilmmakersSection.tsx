@@ -1,5 +1,5 @@
 import aidaPhoto from '@/assets/aida-bekele.jpg';
-import bemnetPhoto from '@/assets/team-member-2.png';
+import bemnetPhoto from '@/assets/bemnet-yemesgen.jpg';
 
 const filmmakers = [
   {
