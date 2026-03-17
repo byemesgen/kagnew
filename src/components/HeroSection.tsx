@@ -14,7 +14,7 @@ export function HeroSection() {
           title="KAGNEW background video"
         />
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-background/70" />
+        <div className="absolute inset-0 bg-background/[0.78]" />
         {/* Radial glow */}
         <div
           className="absolute inset-0"
