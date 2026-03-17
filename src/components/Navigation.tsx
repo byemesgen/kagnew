@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import kagnewLogo from '@/assets/kagnew-logo.svg';
 
 const navLinks = [
   { label: 'Story', href: '#story' },
