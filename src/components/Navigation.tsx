@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import kagnewLogo from '@/assets/kagnew-logo.svg';
 
 const navLinks = [
   { label: 'Story', href: '#story' },
@@ -25,8 +26,8 @@ export function Navigation() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#hero" className="font-playfair text-xl font-bold text-primary">
-            KAGNEW
+          <a href="#hero" className="flex items-center">
+            <img src={kagnewLogo} alt="Kagnew" className="h-5" />
           </a>
 
           {/* Desktop nav */}
