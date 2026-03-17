@@ -11,7 +11,7 @@ export function WhyNowSection() {
         <p className="scroll-fade font-space-mono text-xs uppercase tracking-[0.3em] text-primary mb-4">
           The Time Is Now
         </p>
-        <h2 className="scroll-fade font-playfair text-3xl md:text-[42px] font-bold text-foreground leading-tight mb-8">
+        <h2 className="scroll-fade font-chivo text-3xl md:text-[42px] font-extrabold text-foreground leading-tight mb-8">
           Before Their Voices Are Lost Forever
         </h2>
         <div className="scroll-fade font-source-serif text-base text-foreground/75 leading-relaxed space-y-6 text-left mb-16">

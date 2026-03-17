@@ -14,6 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
+        chivo: ["Chivo", "sans-serif"],
         playfair: ["Playfair Display", "serif"],
         "source-serif": ["Source Serif 4", "serif"],
         "space-mono": ["Space Mono", "monospace"],
