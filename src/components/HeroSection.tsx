@@ -26,7 +26,7 @@ export function HeroSection() {
 
       <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
         <p
-          className="inline-block font-space-mono text-xs uppercase tracking-[0.35em] text-primary bg-background/80 border border-primary/30 rounded-full px-5 py-1.5 mb-6 opacity-0 animate-fade-up-in"
+          className="inline-block font-space-mono text-xs uppercase tracking-[0.35em] text-primary bg-background border border-primary/30 rounded-full px-5 py-1.5 mb-6 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.2s' }}>
           
           A Documentary Film · In Production
