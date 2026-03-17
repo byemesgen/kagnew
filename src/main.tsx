@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import DonatePage from "./pages/DonatePage.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDonations from "./pages/AdminDonations.tsx";
+import AdminResetPassword from "./pages/AdminResetPassword.tsx";
 import { AdminRoute } from "./components/admin/AdminRoute.tsx";
 import "./index.css";
 
