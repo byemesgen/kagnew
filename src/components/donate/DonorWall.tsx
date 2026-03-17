@@ -11,7 +11,24 @@ interface Donor {
   amount_cents: number;
   message: string | null;
   created_at: string;
+  is_recurring: boolean | null;
 }
+
+function getTierBadge(amountCents: number): { label: string; color: string } | null {
+  const dollars = amountCents / 100;
+  if (dollars >= 1000) return { label: 'Patron', color: 'text-primary font-semibold' };
+  if (dollars >= 500) return { label: 'Gold', color: 'text-primary' };
+  if (dollars >= 100) return { label: 'Silver', color: 'text-foreground/60' };
+  if (dollars >= 1) return { label: 'Bronze', color: 'text-amber-700' };
+  return null;
+}
+
+const tierIcons: Record<string, string> = {
+  Patron: '★',
+  Gold: '◆',
+  Silver: '◈',
+  Bronze: '◇',
+};
 
 export function DonorWall() {
   const [donors, setDonors] = useState<Donor[]>([]);
@@ -21,7 +38,7 @@ export function DonorWall() {
   const fetchDonors = async () => {
     const { data } = await supabase
       .from('donations')
-      .select('id, donor_name, is_anonymous, display_amount, amount_cents, message, created_at')
+      .select('id, donor_name, is_anonymous, display_amount, amount_cents, message, created_at, is_recurring')
       .eq('status', 'completed')
       .eq('display_name', true)
       .order('created_at', { ascending: false });
@@ -94,36 +111,54 @@ export function DonorWall() {
       ) : (
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
           <AnimatePresence>
-            {donors.map((donor) => (
-              <motion.div
-                key={donor.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="break-inside-avoid rounded-lg border-l-2 border-primary p-5"
-                style={{ backgroundColor: 'hsl(224 45% 16%)' }}
-              >
-                <p className="font-source-serif text-sm text-foreground font-semibold">
-                  {donor.is_anonymous ? 'Anonymous Friend' : donor.donor_name || 'Anonymous Friend'}
-                </p>
+            {donors.map((donor) => {
+              const badge = getTierBadge(donor.amount_cents);
+              return (
+                <motion.div
+                  key={donor.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="break-inside-avoid rounded-lg border-l-2 border-primary p-5"
+                  style={{ backgroundColor: 'hsl(224 45% 16%)' }}
+                >
+                  <div className="flex items-center gap-2">
+                    <p className="font-source-serif text-sm text-foreground font-semibold">
+                      {donor.is_anonymous ? 'Anonymous Friend' : donor.donor_name || 'Anonymous Friend'}
+                    </p>
+                    {badge && (
+                      <span className={`font-space-mono text-[10px] uppercase tracking-wider ${badge.color}`}>
+                        {tierIcons[badge.label]} {badge.label}
+                      </span>
+                    )}
+                  </div>
 
-                {donor.display_amount && (
-                  <p className="font-space-mono text-xs text-primary mt-1">
-                    {formatAmount(donor.amount_cents)}
+                  {/* Badges row */}
+                  <div className="flex items-center gap-2 mt-1.5">
+                    {donor.display_amount && (
+                      <span className="font-space-mono text-xs text-primary">
+                        {formatAmount(donor.amount_cents)}
+                      </span>
+                    )}
+                    {donor.is_recurring && (
+                      <span className="font-space-mono text-[10px] uppercase tracking-wider text-primary/80 border border-primary/30 rounded-full px-2 py-0.5">
+                        Monthly Supporter
+                      </span>
+                    )}
+                  </div>
+
+                  {donor.message && (
+                    <p className="font-source-serif text-xs text-foreground/60 mt-3 leading-relaxed">
+                      "{truncateMessage(donor.message)}"
+                    </p>
+                  )}
+
+                  <p className="font-space-mono text-[10px] text-foreground/30 mt-3">
+                    {formatDistanceToNow(new Date(donor.created_at), { addSuffix: true })}
                   </p>
-                )}
-
-                {donor.message && (
-                  <p className="font-source-serif text-xs text-foreground/60 mt-3 leading-relaxed">
-                    "{truncateMessage(donor.message)}"
-                  </p>
-                )}
-
-                <p className="font-space-mono text-[10px] text-foreground/30 mt-3">
-                  {formatDistanceToNow(new Date(donor.created_at), { addSuffix: true })}
-                </p>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
         </div>
       )}

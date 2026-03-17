@@ -3,9 +3,10 @@ interface DonationSuccessProps {
   email: string;
   amount: number;
   isAnonymous: boolean;
+  isRecurring: boolean;
 }
 
-export function DonationSuccess({ name, email, amount, isAnonymous }: DonationSuccessProps) {
+export function DonationSuccess({ name, email, amount, isAnonymous, isRecurring }: DonationSuccessProps) {
   const shareText = encodeURIComponent(
     "I just supported KAGNEW — a documentary about Ethiopian soldiers who never lost a prisoner in the Korean War. Join me:"
   );
@@ -23,9 +24,14 @@ export function DonationSuccess({ name, email, amount, isAnonymous }: DonationSu
       <p className="font-source-serif text-lg text-primary mb-2">
         {isAnonymous ? 'Anonymous Friend' : name}
       </p>
-      <p className="font-source-serif text-2xl text-foreground font-semibold mb-6">
-        ${amount.toFixed(0)}
+      <p className="font-source-serif text-2xl text-foreground font-semibold mb-2">
+        ${amount.toFixed(0)}{isRecurring && <span className="text-lg text-muted-foreground">/mo</span>}
       </p>
+      {isRecurring && (
+        <p className="font-space-mono text-xs uppercase tracking-widest text-primary/80 mb-4">
+          Monthly Supporter
+        </p>
+      )}
 
       <p className="font-source-serif text-sm text-muted-foreground mb-10">
         A receipt has been sent to{' '}
