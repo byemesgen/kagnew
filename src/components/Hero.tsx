@@ -141,9 +141,7 @@ export function Hero() {
               </a>
             </div>
 
-            {/* Right Side - Video Controls + CTA + Mobile Menu */}
-            <div className="flex items-center space-x-3 relative">
-              {/* Video Controls + CTA + Mobile Menu */}
+            {/* Right Side - CTA + Mobile Menu */}
             <div className="flex items-center space-x-3 relative">
               
               {/* CTA Button - Hidden on mobile */}
