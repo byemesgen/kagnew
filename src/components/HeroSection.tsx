@@ -63,10 +63,8 @@ export function HeroSection() {
             Stay Informed
           </a>
           <a
-            href="#contact"
-            className="font-space-mono text-sm uppercase tracking-[0.1em] border border-primary text-primary px-8 py-3 hover:bg-primary hover:text-primary-foreground transition-all group relative"
-            title="Teaser coming soon">
-            
+            href="/donate"
+            className="font-space-mono text-sm uppercase tracking-[0.1em] border border-primary text-primary px-8 py-3 hover:bg-primary hover:text-primary-foreground transition-all group relative">
             Donate
           </a>
         </div>
