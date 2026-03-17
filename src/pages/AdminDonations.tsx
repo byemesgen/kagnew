@@ -36,6 +36,11 @@ export default function AdminDonations() {
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
 
+  // Goal settings
+  const [goalDollars, setGoalDollars] = useState('');
+  const [goalSaving, setGoalSaving] = useState(false);
+  const [goalSaved, setGoalSaved] = useState(false);
+
   const fetchDonations = async () => {
     const { data } = await supabase
       .from('donations')
@@ -47,6 +52,15 @@ export default function AdminDonations() {
 
   useEffect(() => {
     fetchDonations();
+    // Fetch goal
+    supabase
+      .from('site_config')
+      .select('value')
+      .eq('key', 'fundraising_goal_cents')
+      .single()
+      .then(({ data }) => {
+        if (data) setGoalDollars((parseInt(data.value, 10) / 100).toString());
+      });
   }, []);
 
   const filtered = useMemo(() => {
@@ -182,7 +196,41 @@ export default function AdminDonations() {
           ))}
         </div>
 
-        {/* Filters */}
+        {/* Goal settings */}
+        <div className="bg-card border border-border rounded-lg p-4 flex flex-wrap items-end gap-3">
+          <div>
+            <label className="font-space-mono text-[10px] uppercase tracking-widest text-muted-foreground block mb-1">
+              Fundraising Goal ($)
+            </label>
+            <input
+              type="number"
+              min="1"
+              value={goalDollars}
+              onChange={(e) => { setGoalDollars(e.target.value); setGoalSaved(false); }}
+              className="bg-background border border-border text-foreground text-sm rounded px-3 py-2 w-40 focus:outline-none focus:ring-1 focus:ring-ring"
+            />
+          </div>
+          <button
+            onClick={async () => {
+              setGoalSaving(true);
+              const cents = Math.round(parseFloat(goalDollars || '0') * 100);
+              await supabase
+                .from('site_config')
+                .update({ value: cents.toString(), updated_at: new Date().toISOString() })
+                .eq('key', 'fundraising_goal_cents');
+              setGoalSaving(false);
+              setGoalSaved(true);
+            }}
+            disabled={goalSaving}
+            className="font-space-mono text-xs uppercase tracking-widest bg-primary text-primary-foreground px-4 py-2 rounded hover:opacity-90 transition-opacity disabled:opacity-40"
+          >
+            {goalSaving ? 'Saving…' : 'Update Goal'}
+          </button>
+          {goalSaved && (
+            <span className="font-space-mono text-xs text-green-400">✓ Saved</span>
+          )}
+        </div>
+
         <div className="flex flex-wrap items-end gap-3">
           <div>
             <label className="font-space-mono text-[10px] uppercase tracking-widest text-muted-foreground block mb-1">Status</label>

@@ -1,31 +1,34 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
-const GOAL_CENTS = 150_000_00; // $150,000
-
 export function FundraisingProgress() {
   const [raisedCents, setRaisedCents] = useState(0);
+  const [goalCents, setGoalCents] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await supabase
-        .from('donations')
-        .select('amount_cents')
-        .eq('status', 'completed');
-      if (data) {
-        setRaisedCents(data.reduce((sum, d) => sum + d.amount_cents, 0));
+      const [donationsRes, configRes] = await Promise.all([
+        supabase.from('donations').select('amount_cents').eq('status', 'completed'),
+        supabase.from('site_config').select('value').eq('key', 'fundraising_goal_cents').single(),
+      ]);
+
+      if (donationsRes.data) {
+        setRaisedCents(donationsRes.data.reduce((sum, d) => sum + d.amount_cents, 0));
+      }
+      if (configRes.data) {
+        setGoalCents(parseInt(configRes.data.value, 10));
       }
       setLoaded(true);
     };
     fetch();
   }, []);
 
-  if (!loaded) return null;
+  if (!loaded || goalCents <= 0) return null;
 
-  const pct = Math.min((raisedCents / GOAL_CENTS) * 100, 100);
+  const pct = Math.min((raisedCents / goalCents) * 100, 100);
   const raised = (raisedCents / 100).toLocaleString();
-  const goal = (GOAL_CENTS / 100).toLocaleString();
+  const goal = (goalCents / 100).toLocaleString();
   const almostThere = pct >= 75;
 
   return (
