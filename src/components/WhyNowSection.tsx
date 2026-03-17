@@ -1,7 +1,11 @@
 const timelineNodes = [
-  { year: '1951', label: 'Ethiopia Deploys', pulse: false },
-  { year: '1953', label: 'Armistice Signed', pulse: false },
-  { year: '2025', label: 'Last Survivors', pulse: true },
+  { label: 'Conflict Begins', date: 'June 25, 1950', desc: 'North Korea invades South Korea' },
+  { label: 'UN Intervention', date: 'September 1950', desc: 'U.S.-led UN forces enter the war' },
+  { label: 'Ethiopia Deploys', date: 'May 1951', desc: 'First Kagnew Battalion arrives in Korea' },
+  { label: 'Kagnew in Combat', date: '1951–1953', desc: 'Ethiopian troops fight in 250+ battles alongside UN forces' },
+  { label: 'Major Engagements', date: '1952', desc: 'Kagnew Battalion fights in key battles including Old Baldy' },
+  { label: 'Armistice Signed', date: 'July 27, 1953', desc: 'Korean Armistice Agreement signed, war ends' },
+  { label: 'Kagnew Legacy Continues', date: '1954–1965', desc: 'Additional Ethiopian rotations remain in Korea post-war' },
 ];
 
 export function WhyNowSection() {
@@ -31,19 +35,27 @@ export function WhyNowSection() {
         </div>
 
         {/* Timeline */}
-        <div className="scroll-fade relative flex items-center justify-between max-w-md mx-auto">
+      </div>
+
+      <div className="scroll-fade relative w-full overflow-x-auto pb-4 scrollbar-thin">
+        <div className="relative flex items-start min-w-max px-8 py-4 mx-auto" style={{ width: 'fit-content' }}>
           {/* Connecting line */}
-          <div className="absolute top-1/2 left-0 right-0 h-px bg-primary/40 -translate-y-1/2" />
-          
-          {timelineNodes.map((node) => (
-            <div key={node.year} className="relative flex flex-col items-center z-10">
-              <span className="font-space-mono text-[10px] uppercase tracking-wider text-kagnew-muted mb-3">
+          <div className="absolute top-[3.25rem] left-8 right-8 h-px bg-primary/40" />
+
+          {timelineNodes.map((node, i) => (
+            <div
+              key={i}
+              className="relative flex flex-col items-center z-10"
+              style={{ width: '180px' }}
+            >
+              <span className="font-space-mono text-[10px] uppercase tracking-wider text-primary mb-3 text-center px-2">
                 {node.label}
               </span>
-              <div
-                className={`w-3 h-3 rounded-full bg-primary ${node.pulse ? 'animate-pulse-dot' : ''}`}
-              />
-              <span className="font-space-mono text-xs text-primary mt-3">{node.year}</span>
+              <div className="w-3 h-3 rounded-full bg-primary flex-shrink-0" />
+              <span className="font-space-mono text-xs text-foreground mt-3">{node.date}</span>
+              <span className="font-source-serif text-[11px] text-foreground/60 mt-1 text-center leading-snug px-2">
+                {node.desc}
+              </span>
             </div>
           ))}
         </div>
