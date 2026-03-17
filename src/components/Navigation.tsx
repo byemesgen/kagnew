@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import kagnewLogo from '@/assets/kagnew-logo.svg';
 
 const navLinks = [
-  { label: 'Story', href: '#story' },
-  { label: 'Why Now', href: '#why-now' },
-  { label: 'Filmmakers', href: '#filmmakers' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Story', hash: '#story' },
+  { label: 'Why Now', hash: '#why-now' },
+  { label: 'Filmmakers', hash: '#filmmakers' },
+  { label: 'Contact', hash: '#contact' },
 ];
 
 export function Navigation() {
