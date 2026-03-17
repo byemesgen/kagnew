@@ -1,4 +1,4 @@
-import aidaPhoto from '@/assets/team-member-1.png';
+import aidaPhoto from '@/assets/aida-bekele.jpg';
 import bemnetPhoto from '@/assets/team-member-2.png';
 
 const filmmakers = [
