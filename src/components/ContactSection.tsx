@@ -5,7 +5,7 @@ export function ContactSection() {
         <p className="scroll-fade font-space-mono text-xs uppercase tracking-[0.3em] text-primary mb-4">
           Stay Informed
         </p>
-        <h2 className="scroll-fade font-playfair text-3xl md:text-[38px] font-bold text-foreground leading-tight mb-4">
+        <h2 className="scroll-fade font-chivo text-3xl md:text-[38px] font-extrabold text-foreground leading-tight mb-4">
           Be Part of This Story
         </h2>
         <p className="scroll-fade font-source-serif text-base text-foreground/60 mb-10">

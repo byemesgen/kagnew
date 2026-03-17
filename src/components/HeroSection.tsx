@@ -32,7 +32,7 @@ export function HeroSection() {
           A Documentary Film · In Production
         </p>
         <h1
-          className="font-playfair text-[44px] md:text-[72px] font-bold text-foreground leading-[1.05] mb-4 opacity-0 animate-fade-up-in"
+          className="font-chivo text-[44px] md:text-[72px] font-extrabold text-foreground leading-[1.05] mb-4 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.4s' }}
         >
           KAGNEW
