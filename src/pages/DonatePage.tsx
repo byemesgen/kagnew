@@ -87,6 +87,7 @@ export default function DonatePage() {
       {/* Conversion overlays */}
       <ExitIntentBar />
       <MobileStickyDonate />
+      <Footer />
     </div>
   );
 }

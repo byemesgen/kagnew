@@ -24,6 +24,7 @@ export default function App() {
         <hr className="gold-rule" />
         <ContactSection />
       </main>
+      <Footer />
     </div>
   );
 }
