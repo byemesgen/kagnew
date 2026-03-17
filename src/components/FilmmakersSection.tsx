@@ -34,11 +34,11 @@ export function FilmmakersSection() {
               className="scroll-fade bg-kagnew-card border border-primary/20 p-8 md:p-10"
             >
               {/* Header: photo + name/title */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-5 mb-6">
                 <img
                   src={person.photo}
                   alt={person.name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-primary"
+                  className="w-24 h-24 rounded-full object-cover border-2 border-primary flex-shrink-0"
                 />
                 <div>
                   <h3 className="font-playfair text-xl font-bold text-foreground">{person.name}</h3>
