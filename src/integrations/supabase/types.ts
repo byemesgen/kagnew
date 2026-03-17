@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      donations: {
+        Row: {
+          amount_cents: number
+          created_at: string
+          currency: string
+          display_amount: boolean | null
+          display_name: boolean | null
+          donor_email: string | null
+          donor_name: string | null
+          id: string
+          is_anonymous: boolean | null
+          message: string | null
+          status: string
+          stripe_payment_id: string | null
+          tier: string | null
+        }
+        Insert: {
+          amount_cents: number
+          created_at?: string
+          currency?: string
+          display_amount?: boolean | null
+          display_name?: boolean | null
+          donor_email?: string | null
+          donor_name?: string | null
+          id?: string
+          is_anonymous?: boolean | null
+          message?: string | null
+          status?: string
+          stripe_payment_id?: string | null
+          tier?: string | null
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string
+          currency?: string
+          display_amount?: boolean | null
+          display_name?: boolean | null
+          donor_email?: string | null
+          donor_name?: string | null
+          id?: string
+          is_anonymous?: boolean | null
+          message?: string | null
+          status?: string
+          stripe_payment_id?: string | null
+          tier?: string | null
+        }
+        Relationships: []
+      }
       email_signups: {
         Row: {
           created_at: string
