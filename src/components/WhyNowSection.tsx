@@ -75,23 +75,17 @@ export function WhyNowSection() {
 
       {/* Timeline — now above the quote */}
       <div className="scroll-fade relative w-full mb-16">
-        {/* Left arrow */}
-        <button
+        {/* Invisible click zones — left 30% and right 30% */}
+        <div
           onClick={() => scroll('left')}
-          className={`absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-background/60 backdrop-blur-sm border border-primary/20 text-primary transition-opacity ${canScrollLeft ? 'opacity-100 hover:bg-background/80' : 'opacity-0 pointer-events-none'}`}
+          className={`absolute left-0 top-0 bottom-0 w-[30%] z-20 cursor-w-resize ${canScrollLeft ? '' : 'pointer-events-none'}`}
           aria-label="Scroll timeline left"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-
-        {/* Right arrow */}
-        <button
+        />
+        <div
           onClick={() => scroll('right')}
-          className={`absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-background/60 backdrop-blur-sm border border-primary/20 text-primary transition-opacity ${canScrollRight ? 'opacity-100 hover:bg-background/80' : 'opacity-0 pointer-events-none'}`}
+          className={`absolute right-0 top-0 bottom-0 w-[30%] z-20 cursor-e-resize ${canScrollRight ? '' : 'pointer-events-none'}`}
           aria-label="Scroll timeline right"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        />
 
         {/* Edge fades */}
         <div className={`absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-r from-kagnew-whynow to-transparent transition-opacity ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`} />
