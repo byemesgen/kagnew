@@ -30,23 +30,30 @@ export function ContactSection() {
   return (
     <section id="contact" className="bg-kagnew-contact py-24 md:py-32 px-6">
       <div className="max-w-[520px] mx-auto text-center">
-        <p className="scroll-fade font-space-mono text-xs uppercase tracking-[0.3em] text-primary mb-4">
-          Stay Informed
-        </p>
-        <h2 className="scroll-fade font-chivo text-3xl md:text-[38px] font-extrabold text-foreground leading-tight mb-4">
-          Be Part of This Story
-        </h2>
-        <p className="scroll-fade font-source-serif text-base text-foreground/60 mb-10">
-          Sign up to receive updates on the film's progress, screening announcements, and ways to
-          support the preservation of this history.
-        </p>
-
         {status === "success" ? (
-          <p className="scroll-fade font-source-serif text-base text-primary mb-16">
-            {message}
-          </p>
+          <div className="scroll-fade text-center mb-16">
+            <p className="font-space-mono text-xs uppercase tracking-[0.3em] text-primary mb-4">
+              Thank You
+            </p>
+            <h2 className="font-chivo text-3xl md:text-[38px] font-extrabold text-foreground leading-tight mb-4">
+              You're In!
+            </h2>
+            <p className="font-source-serif text-base text-foreground/60">
+              {message} We'll keep you updated on the film's progress, screenings, and ways to get involved.
+            </p>
+          </div>
         ) : (
           <>
+            <p className="scroll-fade font-space-mono text-xs uppercase tracking-[0.3em] text-primary mb-4">
+              Stay Informed
+            </p>
+            <h2 className="scroll-fade font-chivo text-3xl md:text-[38px] font-extrabold text-foreground leading-tight mb-4">
+              Be Part of This Story
+            </h2>
+            <p className="scroll-fade font-source-serif text-base text-foreground/60 mb-10">
+              Sign up to receive updates on the film's progress, screening announcements, and ways to
+              support the preservation of this history.
+            </p>
             <form
               className="scroll-fade flex flex-col sm:flex-row gap-3 mb-4"
               onSubmit={handleSubmit}
