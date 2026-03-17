@@ -1,11 +1,16 @@
+import aidaPhoto from '@/assets/team-member-1.png';
+import bemnetPhoto from '@/assets/team-member-2.png';
+
 const filmmakers = [
   {
+    photo: aidaPhoto,
     initials: 'AB',
     name: 'Aida Bekele',
     title: 'Executive Producer',
     bio: 'An Ethiopian educator, organizer, and humanitarian — and daughter of Major Bekele Abebe, a Kagnew Battalion soldier. Aida teaches at the International Community School in Ethiopia and is fluent in English, Amharic, French, and Spanish. Her lived connection to this history ensures the film is grounded, authentic, and driven by truth and human dignity.',
   },
   {
+    photo: bemnetPhoto,
     initials: 'BY',
     name: 'Bemnet Yemesgen',
     title: 'Director & Producer',
@@ -28,14 +33,20 @@ export function FilmmakersSection() {
               key={person.initials}
               className="scroll-fade bg-kagnew-card border border-primary/20 p-8 md:p-10"
             >
-              {/* Avatar */}
-              <div className="w-16 h-16 rounded-full border-2 border-primary flex items-center justify-center mb-6">
-                <span className="font-playfair text-lg font-bold text-primary">{person.initials}</span>
+              {/* Header: photo + name/title */}
+              <div className="flex items-center gap-4 mb-6">
+                <img
+                  src={person.photo}
+                  alt={person.name}
+                  className="w-16 h-16 rounded-full object-cover border-2 border-primary"
+                />
+                <div>
+                  <h3 className="font-playfair text-xl font-bold text-foreground">{person.name}</h3>
+                  <p className="font-space-mono text-xs uppercase tracking-[0.2em] text-primary">
+                    {person.title}
+                  </p>
+                </div>
               </div>
-              <h3 className="font-playfair text-xl font-bold text-foreground mb-1">{person.name}</h3>
-              <p className="font-space-mono text-xs uppercase tracking-[0.2em] text-primary mb-4">
-                {person.title}
-              </p>
               <p className="font-source-serif text-sm text-foreground/70 leading-relaxed">
                 {person.bio}
               </p>
