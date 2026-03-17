@@ -52,6 +52,15 @@ export default function AdminDonations() {
 
   useEffect(() => {
     fetchDonations();
+    // Fetch goal
+    supabase
+      .from('site_config')
+      .select('value')
+      .eq('key', 'fundraising_goal_cents')
+      .single()
+      .then(({ data }) => {
+        if (data) setGoalDollars((parseInt(data.value, 10) / 100).toString());
+      });
   }, []);
 
   const filtered = useMemo(() => {
