@@ -4,6 +4,7 @@ import { StorySection } from './components/StorySection';
 import { WhyNowSection } from './components/WhyNowSection';
 import { FilmmakersSection } from './components/FilmmakersSection';
 import { ContactSection } from './components/ContactSection';
+import { Footer } from './components/Footer';
 import { useScrollFadeIn } from './hooks/useScrollFadeIn';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
         <hr className="gold-rule" />
         <ContactSection />
       </main>
+      <Footer />
     </div>
   );
 }
