@@ -1,3 +1,5 @@
+import kagnewLogo from '@/assets/kagnew-logo.svg';
+
 export function HeroSection() {
   return (
     <section
@@ -31,12 +33,11 @@ export function HeroSection() {
           
           A Documentary Film · In Production
         </p>
-        <h1
-          className="font-chivo text-[44px] md:text-[72px] font-extrabold text-foreground leading-[1.05] mb-4 opacity-0 animate-fade-up-in"
+        <div
+          className="mb-4 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.4s' }}>
-          
-          KAGNEW
-        </h1>
+          <img src={kagnewLogo} alt="Kagnew" className="h-[44px] md:h-[72px] w-auto" />
+        </div>
         <p
           className="font-source-serif text-lg md:text-[22px] italic text-foreground/70 mb-6 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.6s' }}>
