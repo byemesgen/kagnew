@@ -9,11 +9,13 @@ export default function DonatePage() {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [amountCents, setAmountCents] = useState(0);
   const [customAmount, setCustomAmount] = useState('');
+  const [isRecurring, setIsRecurring] = useState(false);
   const [successData, setSuccessData] = useState<{
     name: string;
     email: string;
     amount: number;
     isAnonymous: boolean;
+    isRecurring: boolean;
   } | null>(null);
 
   const handleSelectTier = (tier: string, cents: number) => {
@@ -52,8 +54,10 @@ export default function DonatePage() {
                 <TierSelector
                   selectedTier={selectedTier}
                   customAmount={customAmount}
+                  isRecurring={isRecurring}
                   onSelectTier={handleSelectTier}
                   onCustomAmountChange={setCustomAmount}
+                  onRecurringChange={setIsRecurring}
                 />
               </div>
 
@@ -61,6 +65,7 @@ export default function DonatePage() {
               <DonationForm
                 selectedTier={selectedTier}
                 amountCents={amountCents}
+                isRecurring={isRecurring}
                 onSuccess={setSuccessData}
               />
             </>

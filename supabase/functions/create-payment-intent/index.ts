@@ -12,7 +12,7 @@ serve(async (req) => {
   }
 
   try {
-    const { amount_cents, currency, donor_name, donor_email, is_anonymous, display_name, display_amount, message, tier } = await req.json();
+    const { amount_cents, currency, donor_name, donor_email, is_anonymous, display_name, display_amount, message, tier, is_recurring } = await req.json();
 
     if (!amount_cents || amount_cents < 100) {
       return new Response(JSON.stringify({ error: "Minimum donation is $1" }), {
@@ -26,13 +26,9 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // TODO: Create Stripe PaymentIntent here when Stripe is enabled
-    // const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!);
-    // const paymentIntent = await stripe.paymentIntents.create({
-    //   amount: amount_cents,
-    //   currency: currency || 'usd',
-    //   metadata: { donor_name, donor_email, tier },
-    // });
+    // TODO: When Stripe is enabled:
+    // - If is_recurring: create Stripe Customer + Subscription
+    // - If one-time: create Stripe PaymentIntent
 
     // Insert pending donation
     const { data: donation, error: dbError } = await supabase
@@ -47,8 +43,8 @@ serve(async (req) => {
         display_amount: display_amount ?? false,
         message: message || null,
         tier,
+        is_recurring: is_recurring ?? false,
         status: "pending",
-        // stripe_payment_id: paymentIntent.id, // TODO: uncomment with Stripe
       })
       .select("id")
       .single();
