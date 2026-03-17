@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const timelineNodes = [
   { label: 'Conflict Begins', date: 'June 25, 1950', desc: 'North Korea invades South Korea' },
