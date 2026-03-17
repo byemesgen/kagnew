@@ -116,7 +116,7 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
           💳 Payment Element
         </p>
         <p className="font-source-serif text-sm text-foreground/50 mt-2 italic">
-          {isRecurring ? 'Stripe subscription will be connected here' : 'Stripe integration will be connected here'}
+          Stripe integration will be connected here
         </p>
       </div>
 
