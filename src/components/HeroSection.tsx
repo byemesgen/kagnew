@@ -7,7 +7,7 @@ export function HeroSection() {
       {/* Vimeo background video */}
       <div className="absolute inset-0 z-0">
         <iframe
-          src="https://player.vimeo.com/video/1174454675?h=fd3f56db7c&background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0"
+          src="https://player.vimeo.com/video/1174479651?h=a948535b08&background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0"
           className="absolute top-1/2 left-1/2 w-[177.78vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2"
           style={{ border: 'none' }}
           allow="autoplay; fullscreen"
