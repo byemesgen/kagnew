@@ -40,7 +40,7 @@ export function WhyNowSection() {
       <div className="scroll-fade relative w-full overflow-x-auto pb-4 scrollbar-thin">
         <div className="relative flex items-start min-w-max px-8 py-4 mx-auto" style={{ width: 'fit-content' }}>
           {/* Connecting line */}
-          <div className="absolute top-[3.25rem] left-8 right-8 h-px bg-primary/40" />
+          <div className="absolute top-[3.25rem] left-8 right-8 h-px" style={{ backgroundColor: 'rgba(201, 168, 76, 0.4)' }} />
 
           {timelineNodes.map((node, i) => (
             <div
