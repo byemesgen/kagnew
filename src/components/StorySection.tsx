@@ -1,6 +1,7 @@
 const stats = [
   { number: '6,037', label: 'Ethiopian soldiers deployed' },
   { number: '253', label: 'Battles fought — zero prisoners taken' },
+  { number: '0', label: 'Ethiopian soldier casualties' },
   { number: '~200', label: 'Survivors still living today' },
 ];
 
@@ -9,7 +10,7 @@ export function StorySection() {
     <section id="story" className="bg-kagnew-story py-24 md:py-32 px-6">
       <div className="max-w-5xl mx-auto">
         {/* Stats */}
-        <div className="scroll-fade grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="scroll-fade grid grid-cols-1 md:grid-cols-4 gap-8 mb-20">
           {stats.map((stat) => (
             <div key={stat.number} className="border-t border-primary/40 pt-6 text-center md:text-left">
               <p className="font-playfair text-4xl md:text-5xl font-bold text-primary mb-2">{stat.number}</p>
