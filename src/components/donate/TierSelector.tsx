@@ -85,7 +85,7 @@ export function TierSelector({ selectedTier, customAmount, isRecurring, onSelect
             const cents = Math.round(parseFloat(customAmount || '0') * 100);
             onSelectTier('custom', cents);
           }}
-          className={`group relative flex flex-col items-center text-center p-5 rounded-lg border transition-all duration-300 hover:-translate-y-0.5 cursor-pointer ${
+          className={`group relative flex flex-col items-center text-center p-5 rounded-lg border transition-all duration-300 hover:-translate-y-0.5 cursor-pointer col-span-2 sm:col-span-1 ${
             selectedTier === 'custom'
               ? 'border-primary bg-primary/10 shadow-[0_0_20px_rgba(201,168,76,0.15)]'
               : 'border-border bg-card hover:border-primary/50 hover:shadow-[0_0_15px_rgba(201,168,76,0.08)]'
@@ -95,7 +95,7 @@ export function TierSelector({ selectedTier, customAmount, isRecurring, onSelect
             Custom
           </span>
           <div className="flex items-center gap-1 mb-2">
-            <span className="font-source-serif text-2xl text-primary font-semibold">$</span>
+            <span className="font-source-serif text-xl text-primary font-semibold">$</span>
             <input
               type="number"
               min="1"
@@ -107,7 +107,7 @@ export function TierSelector({ selectedTier, customAmount, isRecurring, onSelect
                 const cents = Math.round(parseFloat(e.target.value || '0') * 100);
                 if (cents > 0) onSelectTier('custom', cents);
               }}
-              className="w-16 bg-transparent border-b border-primary/40 text-center font-source-serif text-2xl text-primary font-semibold outline-none focus:border-primary placeholder:text-primary/30"
+              className="w-24 bg-transparent border-b border-primary/40 text-center font-source-serif text-xl text-primary font-semibold outline-none focus:border-primary placeholder:text-primary/30"
             />
             {isRecurring && <span className="font-source-serif text-sm text-primary">/mo</span>}
           </div>
