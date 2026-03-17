@@ -14,6 +14,7 @@ createRoot(document.getElementById("root")!).render(
       <Route path="/" element={<App />} />
       <Route path="/donate" element={<DonatePage />} />
       <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin/reset-password" element={<AdminResetPassword />} />
       <Route
         path="/admin/donations"
         element={
