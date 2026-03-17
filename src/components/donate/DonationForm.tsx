@@ -8,11 +8,10 @@ import { supabase } from '@/integrations/supabase/client';
 interface DonationFormProps {
   selectedTier: string | null;
   amountCents: number;
-  isRecurring: boolean;
-  onSuccess: (data: { name: string; email: string; amount: number; isAnonymous: boolean; isRecurring: boolean }) => void;
+  onSuccess: (data: { name: string; email: string; amount: number; isAnonymous: boolean }) => void;
 }
 
-export function DonationForm({ selectedTier, amountCents, isRecurring, onSuccess }: DonationFormProps) {
+export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState(false);
