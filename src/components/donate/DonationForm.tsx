@@ -67,7 +67,6 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
         email: email.trim(),
         amount: amountCents / 100,
         isAnonymous: !displayName,
-        isRecurring,
       });
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');
