@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
+import { TrustSignals } from '@/components/donate/TrustSignals';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
