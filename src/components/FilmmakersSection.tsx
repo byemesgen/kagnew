@@ -5,7 +5,7 @@ const filmmakers = [
   {
     photo: aidaPhoto,
     initials: 'AB',
-    name: 'Aida Bekele',
+    name: 'Aïda Bekele',
     title: 'Executive Producer',
     bio: 'An Ethiopian educator, organizer, and humanitarian — and daughter of Major Bekele Abebe, a Kagnew Battalion soldier. Aida teaches at the International Community School in Ethiopia and is fluent in English, Amharic, French, and Spanish. Her lived connection to this history ensures the film is grounded, authentic, and driven by truth and human dignity.',
   },
