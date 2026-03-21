@@ -127,8 +127,11 @@ export function StorySection() {
         </div>
       </div>
 
-      {/* Timeline — full viewport width */}
-      <div className="scroll-fade relative w-full mb-20">
+      <div ref={timelineWrapperRef} className="scroll-fade relative w-full mb-20">
+        {/* Gold line — full viewport width, centered on dots */}
+        {lineTop !== null && (
+          <div className="absolute left-0 w-full h-px z-0" style={{ backgroundColor: 'rgba(201, 168, 76, 0.4)', top: `${lineTop}px` }} />
+        )}
         <div
           onClick={() => scroll('left')}
           className={`absolute left-0 top-0 bottom-0 w-[30%] z-20 cursor-w-resize ${canScrollLeft ? '' : 'pointer-events-none'}`}
