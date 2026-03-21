@@ -125,28 +125,26 @@ export function StorySection() {
 
         <div
           ref={scrollRef}
-          className="overflow-x-auto pb-4 px-12 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none"
+          className="overflow-x-auto pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none snap-x snap-mandatory"
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
-          <div className="relative flex min-w-max px-8 py-4 mx-auto" style={{ width: 'fit-content' }}>
-            {/* Gold line — vertically centered on the dots row */}
-            <div className="absolute left-8 right-8 h-px" style={{ backgroundColor: 'rgba(201, 168, 76, 0.4)', top: 'calc(50% - 2px)' }} />
+          <div className="relative flex min-w-max py-4 mx-auto" style={{ width: 'fit-content' }}>
+            <div className="absolute left-0 right-0 h-px" style={{ backgroundColor: 'rgba(201, 168, 76, 0.4)', top: 'calc(50% - 2px)' }} />
             {timelineNodes.map((node, i) => (
               <div
                 key={i}
-                className="relative flex flex-col items-center z-10"
-                style={{ width: '360px' }}
+                className="relative flex flex-col items-center z-10 snap-center w-[80vw] md:w-[360px] flex-shrink-0"
               >
                 <span className="font-space-mono text-sm uppercase tracking-wider text-primary mb-3 text-center px-2">
                   {node.label}
                 </span>
                 <div className="w-3 h-3 rounded-full bg-primary flex-shrink-0" />
                 <span className="font-space-mono text-sm text-foreground mt-3">{node.date}</span>
-                <span className="font-source-serif text-sm mt-1 text-center leading-snug px-2" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                <span className="font-source-serif text-sm mt-1 text-center leading-snug px-4" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   {node.desc}
                 </span>
               </div>
