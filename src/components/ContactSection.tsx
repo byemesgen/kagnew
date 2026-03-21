@@ -84,7 +84,7 @@ export function ContactSection() {
           </>
         )}
 
-        <hr className="gold-rule mb-8" />
+        
 
       </div>
     </section>
