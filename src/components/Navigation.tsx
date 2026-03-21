@@ -63,37 +63,50 @@ export function Navigation() {
           </div>
 
           {/* Mobile hamburger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden relative z-50 flex flex-col items-center justify-center gap-1.5 w-10 h-10"
-            aria-label="Toggle menu"
-          >
-            <span className={`w-6 h-0.5 bg-primary transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[4px]' : ''}`} />
-            <span className={`w-6 h-0.5 bg-primary transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-            <span className={`w-6 h-0.5 bg-primary transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
-          </button>
+          {!menuOpen && (
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="lg:hidden relative z-50 grid h-11 w-11 shrink-0 place-items-center overflow-visible"
+              aria-label="Open menu"
+            >
+              <span className="block h-0.5 w-7 bg-primary" />
+              <span className="block h-0.5 w-7 bg-primary" />
+              <span className="block h-0.5 w-7 bg-primary" />
+            </button>
+          )}
         </div>
       </nav>
 
       {/* Mobile overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-background backdrop-blur-md flex flex-col items-center justify-center gap-8">
-          {navLinks.map((link) => (
+        <>
+          <div className="fixed inset-0 z-50 bg-background backdrop-blur-md flex flex-col items-center justify-center gap-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.hash}
+                onClick={() => handleNavClick(link.hash)}
+                className="font-space-mono text-sm uppercase tracking-[0.25em] text-foreground/80 hover:text-primary transition-colors"
+              >
+                {link.label}
+              </button>
+            ))}
             <button
-              key={link.hash}
-              onClick={() => handleNavClick(link.hash)}
-              className="font-space-mono text-sm uppercase tracking-[0.25em] text-foreground/80 hover:text-primary transition-colors"
+              onClick={() => handleNavClick('#contact')}
+              className="font-space-mono text-sm uppercase tracking-[0.15em] border border-primary text-primary px-6 py-3 hover:bg-primary hover:text-primary-foreground transition-all"
             >
-              {link.label}
+              Stay Informed
             </button>
-          ))}
+          </div>
+
           <button
-            onClick={() => handleNavClick('#contact')}
-            className="font-space-mono text-sm uppercase tracking-[0.15em] border border-primary text-primary px-6 py-3 hover:bg-primary hover:text-primary-foreground transition-all"
+            onClick={() => setMenuOpen(false)}
+            className="lg:hidden fixed top-4 right-4 z-[60] grid h-11 w-11 place-items-center overflow-visible"
+            aria-label="Close menu"
           >
-            Stay Informed
+            <span className="absolute block h-0.5 w-7 rotate-45 bg-primary" />
+            <span className="absolute block h-0.5 w-7 -rotate-45 bg-primary" />
           </button>
-        </div>
+        </>
       )}
     </>
   );
