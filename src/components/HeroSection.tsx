@@ -42,7 +42,7 @@ export function HeroSection() {
           className="font-source-serif text-lg md:text-[22px] italic text-foreground/70 mb-6 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.6s' }}>
           
-          The Untold Story of Ethiopia's Warriors in Korea
+          The Untold Story of Ethiopia's Warriors who Fought in the Korean War 
         </p>
         <p
           className="font-source-serif text-base text-foreground/60 max-w-[540px] mx-auto mb-10 opacity-0 animate-fade-up-in"
