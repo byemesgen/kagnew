@@ -45,6 +45,22 @@ export function StorySection() {
     };
   }, [updateScrollButtons]);
 
+  // Position the gold line at the exact vertical center of the dots
+  useEffect(() => {
+    const updateLinePos = () => {
+      const wrapper = timelineWrapperRef.current;
+      if (!wrapper) return;
+      const dot = wrapper.querySelector('.timeline-dot') as HTMLElement;
+      if (!dot) return;
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const dotRect = dot.getBoundingClientRect();
+      setLineTop(dotRect.top - wrapperRect.top + dotRect.height / 2);
+    };
+    updateLinePos();
+    window.addEventListener('resize', updateLinePos);
+    return () => window.removeEventListener('resize', updateLinePos);
+  }, []);
+
   const scroll = (direction: 'left' | 'right') => {
     const el = scrollRef.current;
     if (!el) return;
