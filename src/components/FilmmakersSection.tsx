@@ -38,7 +38,7 @@ export function FilmmakersSection() {
                 <img
                   src={person.photo}
                   alt={person.name}
-                  className="w-24 h-24 rounded-full object-cover border-2 border-primary flex-shrink-0"
+                  className="w-48 h-48 rounded-full object-cover border-2 border-primary flex-shrink-0"
                 />
                 <div>
                   <h3 className="font-playfair text-xl font-bold text-foreground">{person.name}</h3>
