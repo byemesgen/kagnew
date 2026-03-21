@@ -19,9 +19,11 @@ const timelineNodes = [
 
 export function StorySection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const timelineWrapperRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
+  const [lineTop, setLineTop] = useState<number | null>(null);
   const dragState = useRef({ startX: 0, scrollLeft: 0 });
 
   const updateScrollButtons = useCallback(() => {
