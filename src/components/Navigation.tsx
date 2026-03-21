@@ -66,12 +66,12 @@ export function Navigation() {
           {!menuOpen && (
             <button
               onClick={() => setMenuOpen(true)}
-              className="lg:hidden relative z-50 grid h-11 w-11 shrink-0 place-items-center overflow-visible"
+              className="lg:hidden relative z-50 flex flex-col items-center justify-center gap-1.5 w-10 h-10"
               aria-label="Open menu"
             >
-              <span className="block h-0.5 w-7 bg-primary" />
-              <span className="block h-0.5 w-7 bg-primary" />
-              <span className="block h-0.5 w-7 bg-primary" />
+              <span className="block h-0.5 w-6 bg-primary" />
+              <span className="block h-0.5 w-6 bg-primary" />
+              <span className="block h-0.5 w-6 bg-primary" />
             </button>
           )}
         </div>
