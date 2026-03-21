@@ -65,12 +65,12 @@ export function Navigation() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden flex flex-col gap-1.5 p-2"
+            className="lg:hidden relative z-50 flex flex-col items-center justify-center gap-1.5 w-10 h-10"
             aria-label="Toggle menu"
           >
-            <span className={`w-6 h-px bg-primary transition-transform ${menuOpen ? 'rotate-45 translate-y-[4px]' : ''}`} />
-            <span className={`w-6 h-px bg-primary transition-opacity ${menuOpen ? 'opacity-0' : ''}`} />
-            <span className={`w-6 h-px bg-primary transition-transform ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
+            <span className={`w-6 h-0.5 bg-primary transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[4px]' : ''}`} />
+            <span className={`w-6 h-0.5 bg-primary transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`w-6 h-0.5 bg-primary transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
           </button>
         </div>
       </nav>
