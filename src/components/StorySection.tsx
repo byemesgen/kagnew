@@ -19,9 +19,11 @@ const timelineNodes = [
 
 export function StorySection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const timelineWrapperRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
+  const [lineTop, setLineTop] = useState<number | null>(null);
   const dragState = useRef({ startX: 0, scrollLeft: 0 });
 
   const updateScrollButtons = useCallback(() => {
@@ -42,6 +44,22 @@ export function StorySection() {
       window.removeEventListener('resize', updateScrollButtons);
     };
   }, [updateScrollButtons]);
+
+  // Position the gold line at the exact vertical center of the dots
+  useEffect(() => {
+    const updateLinePos = () => {
+      const wrapper = timelineWrapperRef.current;
+      if (!wrapper) return;
+      const dot = wrapper.querySelector('.timeline-dot') as HTMLElement;
+      if (!dot) return;
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const dotRect = dot.getBoundingClientRect();
+      setLineTop(dotRect.top - wrapperRect.top + dotRect.height / 2);
+    };
+    updateLinePos();
+    window.addEventListener('resize', updateLinePos);
+    return () => window.removeEventListener('resize', updateLinePos);
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     const el = scrollRef.current;
@@ -109,8 +127,11 @@ export function StorySection() {
         </div>
       </div>
 
-      {/* Timeline — full viewport width */}
-      <div className="scroll-fade relative w-full mb-20">
+      <div ref={timelineWrapperRef} className="scroll-fade relative w-full mb-20">
+        {/* Gold line — full viewport width, centered on dots */}
+        {lineTop !== null && (
+          <div className="absolute left-0 w-full h-px z-0" style={{ backgroundColor: 'rgba(201, 168, 76, 0.4)', top: `${lineTop}px` }} />
+        )}
         <div
           onClick={() => scroll('left')}
           className={`absolute left-0 top-0 bottom-0 w-[30%] z-20 cursor-w-resize ${canScrollLeft ? '' : 'pointer-events-none'}`}
@@ -133,8 +154,7 @@ export function StorySection() {
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
-          <div className="relative flex min-w-max py-4 mx-auto" style={{ width: 'fit-content' }}>
-            <div className="absolute left-0 right-0 h-px" style={{ backgroundColor: 'rgba(201, 168, 76, 0.4)', top: 'calc(50% - 2px)' }} />
+          <div className="relative flex min-w-max py-4" style={{ width: 'fit-content' }}>
             {timelineNodes.map((node, i) => (
               <div
                 key={i}
@@ -143,7 +163,7 @@ export function StorySection() {
                 <span className="font-space-mono text-sm uppercase tracking-wider text-primary mb-3 text-center px-2">
                   {node.label}
                 </span>
-                <div className="w-3 h-3 rounded-full bg-primary flex-shrink-0" />
+                <div className="w-3 h-3 rounded-full bg-primary flex-shrink-0 timeline-dot" />
                 <span className="font-space-mono text-sm text-foreground mt-3">{node.date}</span>
                 <span className="font-source-serif text-sm mt-1 text-center leading-snug px-4" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   {node.desc}
