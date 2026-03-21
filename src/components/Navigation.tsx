@@ -44,7 +44,7 @@ export function Navigation() {
           </button>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <button
                 key={link.hash}
@@ -65,7 +65,7 @@ export function Navigation() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2"
+            className="lg:hidden flex flex-col gap-1.5 p-2"
             aria-label="Toggle menu"
           >
             <span className={`w-6 h-px bg-primary transition-transform ${menuOpen ? 'rotate-45 translate-y-[4px]' : ''}`} />
