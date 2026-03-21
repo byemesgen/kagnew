@@ -77,7 +77,7 @@ export function Navigation() {
 
       {/* Mobile overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-md flex flex-col items-center justify-center gap-8">
+        <div className="fixed inset-0 z-40 bg-background backdrop-blur-md flex flex-col items-center justify-center gap-8">
           {navLinks.map((link) => (
             <button
               key={link.hash}
