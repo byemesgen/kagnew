@@ -46,7 +46,8 @@ export function StorySection() {
   const scroll = (direction: 'left' | 'right') => {
     const el = scrollRef.current;
     if (!el) return;
-    el.scrollBy({ left: direction === 'left' ? -360 : 360, behavior: 'smooth' });
+    const scrollAmount = window.innerWidth < 768 ? window.innerWidth * 0.8 : 360;
+    el.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
   };
 
   const onPointerDown = (e: React.PointerEvent) => {
