@@ -133,8 +133,7 @@ export function StorySection() {
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
-          <div className="relative flex min-w-max py-4 mx-auto" style={{ width: 'fit-content' }}>
-            <div className="absolute left-0 right-0 h-px" style={{ backgroundColor: 'rgba(201, 168, 76, 0.4)', top: 'calc(50% - 2px)' }} />
+          <div className="relative flex min-w-max py-4" style={{ width: 'fit-content' }}>
             {timelineNodes.map((node, i) => (
               <div
                 key={i}
@@ -143,7 +142,7 @@ export function StorySection() {
                 <span className="font-space-mono text-sm uppercase tracking-wider text-primary mb-3 text-center px-2">
                   {node.label}
                 </span>
-                <div className="w-3 h-3 rounded-full bg-primary flex-shrink-0" />
+                <div className="w-3 h-3 rounded-full bg-primary flex-shrink-0 timeline-dot" />
                 <span className="font-space-mono text-sm text-foreground mt-3">{node.date}</span>
                 <span className="font-source-serif text-sm mt-1 text-center leading-snug px-4" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   {node.desc}
