@@ -86,9 +86,6 @@ export function ContactSection() {
 
         <hr className="gold-rule mb-8" />
 
-        <p className="font-space-mono text-[11px] text-kagnew-muted tracking-wider">
-          © 2026 KAGNEW DOCUMENTARY — ALL RIGHTS RESERVED
-        </p>
       </div>
     </section>
   );
