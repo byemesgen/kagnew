@@ -13,6 +13,7 @@ export function HeroSection() {
           className="absolute top-1/2 left-1/2 w-[177.78vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2"
           style={{ border: 'none' }}
           allow="autoplay; fullscreen"
+          loading="lazy"
           title="KAGNEW background video" />
         
         {/* Dark overlay for readability */}
