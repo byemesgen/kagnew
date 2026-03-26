@@ -53,22 +53,6 @@ export function DonorWall() {
 
   useEffect(() => {
     Promise.all([fetchDonors(), fetchCount()]).then(() => setLoading(false));
-
-    const channel = supabase
-      .channel('donor-wall')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'donations' },
-        () => {
-          fetchDonors();
-          fetchCount();
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
   }, []);
 
   const formatAmount = (cents: number) => {
