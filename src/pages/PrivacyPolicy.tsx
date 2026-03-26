@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 
 export default function PrivacyPolicy() {
+  useEffect(() => { document.title = 'Privacy Policy — KAGNEW'; }, []);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />

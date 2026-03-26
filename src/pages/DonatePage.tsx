@@ -11,6 +11,7 @@ import { MobileStickyDonate } from '@/components/donate/MobileStickyDonate';
 import { Footer } from '@/components/Footer';
 
 export default function DonatePage() {
+  useEffect(() => { document.title = 'Donate — Support the KAGNEW Documentary'; }, []);
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [amountCents, setAmountCents] = useState(0);
   const [customAmount, setCustomAmount] = useState('');
