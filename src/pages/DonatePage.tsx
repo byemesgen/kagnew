@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { TierSelector } from '@/components/donate/TierSelector';
 import { DonationForm } from '@/components/donate/DonationForm';
