@@ -33,11 +33,11 @@ export function HeroSection() {
           
           A Documentary Film 
         </p>
-        <div
+        <h1
           className="mb-4 opacity-0 animate-fade-up-in flex justify-center"
           style={{ animationDelay: '0.4s' }}>
-          <img src={kagnewLogo} alt="Kagnew" className="h-[44px] md:h-[72px] w-auto" />
-        </div>
+          <img src={kagnewLogo} alt="KAGNEW — Ethiopian Warriors in the Korean War" className="h-[44px] md:h-[72px] w-auto" />
+        </h1>
         <p
           className="font-source-serif text-lg md:text-[22px] italic text-foreground/70 mb-6 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.6s' }}>
