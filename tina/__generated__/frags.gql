@@ -1,0 +1,19 @@
+fragment PostParts on Post {
+  __typename
+  title
+  date
+  author
+  excerpt
+  heroImage
+  body
+}
+
+fragment SiteContentParts on SiteContent {
+  __typename
+  heroTagline
+  heroSubtitle
+  heroDescription
+  storyParagraph1
+  storyParagraph2
+  storyParagraph3
+}
