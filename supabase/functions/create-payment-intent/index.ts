@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import Stripe from "https://esm.sh/stripe@14?target=deno";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -12,7 +13,18 @@ serve(async (req) => {
   }
 
   try {
-    const { amount_cents, currency, donor_name, donor_email, is_anonymous, display_name, display_amount, message, tier, is_recurring } = await req.json();
+    const {
+      amount_cents,
+      currency,
+      donor_name,
+      donor_email,
+      is_anonymous,
+      display_name,
+      display_amount,
+      message,
+      tier,
+      is_recurring,
+    } = await req.json();
 
     if (!amount_cents || amount_cents < 100) {
       return new Response(JSON.stringify({ error: "Minimum donation is $1" }), {
@@ -26,11 +38,24 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // TODO: When Stripe is enabled:
-    // - If is_recurring: create Stripe Customer + Subscription
-    // - If one-time: create Stripe PaymentIntent
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, {
+      apiVersion: "2023-10-16",
+      httpClient: Stripe.createFetchHttpClient(),
+    });
 
-    // Insert pending donation
+    // Create Stripe PaymentIntent
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount_cents,
+      currency: currency || "usd",
+      receipt_email: donor_email,
+      metadata: {
+        donor_name,
+        donor_email,
+        tier: tier || "",
+      },
+    });
+
+    // Insert pending donation record
     const { data: donation, error: dbError } = await supabase
       .from("donations")
       .insert({
@@ -45,6 +70,7 @@ serve(async (req) => {
         tier,
         is_recurring: is_recurring ?? false,
         status: "pending",
+        stripe_payment_id: paymentIntent.id,
       })
       .select("id")
       .single();
@@ -54,8 +80,8 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         donationId: donation.id,
-        // clientSecret: paymentIntent.client_secret, // TODO: uncomment with Stripe
-        paymentIntentId: "pending_stripe_setup",
+        clientSecret: paymentIntent.client_secret,
+        paymentIntentId: paymentIntent.id,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );

@@ -4,11 +4,116 @@ import { TrustSignals } from '@/components/donate/TrustSignals';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
+import { loadStripe } from '@stripe/stripe-js';
+import {
+  Elements,
+  PaymentElement,
+  useStripe,
+  useElements,
+} from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 interface DonationFormProps {
   selectedTier: string | null;
   amountCents: number;
   onSuccess: (data: { name: string; email: string; amount: number; isAnonymous: boolean }) => void;
+}
+
+// Inner component that uses Stripe hooks — must be inside <Elements>
+function StripePaymentStep({
+  donationId,
+  paymentIntentId,
+  amountCents,
+  onSuccess,
+  onBack,
+  donorDisplayName,
+  donorEmail,
+  isAnonymous,
+}: {
+  donationId: string;
+  paymentIntentId: string;
+  amountCents: number;
+  onSuccess: () => void;
+  onBack: () => void;
+  donorDisplayName: string;
+  donorEmail: string;
+  isAnonymous: boolean;
+}) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handlePay = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Confirm payment with Stripe
+      const { error: stripeError, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        redirect: 'if_required',
+      });
+
+      if (stripeError) {
+        setError(stripeError.message || 'Payment failed. Please try again.');
+        return;
+      }
+
+      if (paymentIntent?.status !== 'succeeded') {
+        setError('Payment was not completed. Please try again.');
+        return;
+      }
+
+      // Verify and record on our backend
+      const { error: confirmError } = await supabase.functions.invoke('confirm-donation', {
+        body: { donationId, paymentIntentId: paymentIntent.id },
+      });
+
+      if (confirmError) throw new Error(confirmError.message);
+
+      onSuccess();
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handlePay} className="space-y-6">
+      <button
+        type="button"
+        onClick={onBack}
+        className="font-space-mono text-xs uppercase tracking-[0.2em] text-primary hover:underline"
+      >
+        ← Back
+      </button>
+
+      <div className="rounded-lg border border-border bg-card p-6">
+        <PaymentElement />
+      </div>
+
+      {error && (
+        <div className="rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3">
+          <p className="font-source-serif text-sm text-destructive">{error}</p>
+        </div>
+      )}
+
+      <TrustSignals />
+
+      <button
+        type="submit"
+        disabled={loading || !stripe || !elements}
+        className="w-full bg-primary text-primary-foreground font-space-mono text-sm uppercase tracking-[0.15em] py-4 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+      >
+        {loading ? 'Processing…' : `Donate $${(amountCents / 100).toFixed(0)}`}
+      </button>
+    </form>
+  );
 }
 
 export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationFormProps) {
@@ -20,7 +125,12 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Step 2 state
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [donationId, setDonationId] = useState<string | null>(null);
+  const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
+
+  const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
@@ -51,23 +161,11 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
       });
 
       if (fnError) throw new Error(fnError.message);
+      if (!data.clientSecret) throw new Error('Failed to initialize payment.');
 
-      // TODO: When Stripe is enabled, use the clientSecret to confirm payment
-      const { error: confirmError } = await supabase.functions.invoke('confirm-donation', {
-        body: {
-          donationId: data.donationId,
-          paymentIntentId: data.paymentIntentId || 'pending_stripe_setup',
-        },
-      });
-
-      if (confirmError) throw new Error(confirmError.message);
-
-      onSuccess({
-        name: displayName ? name.trim() : 'Anonymous Friend',
-        email: email.trim(),
-        amount: amountCents / 100,
-        isAnonymous: !displayName,
-      });
+      setClientSecret(data.clientSecret);
+      setDonationId(data.donationId);
+      setPaymentIntentId(data.paymentIntentId);
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');
     } finally {
@@ -75,11 +173,54 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
     }
   };
 
+  const handlePaymentSuccess = () => {
+    onSuccess({
+      name: displayName ? name.trim() : 'Anonymous Friend',
+      email: email.trim(),
+      amount: amountCents / 100,
+      isAnonymous: !displayName,
+    });
+  };
+
   const amountLabel = `$${(amountCents / 100).toFixed(0)}`;
 
+  // Step 2: Payment
+  if (clientSecret && donationId && paymentIntentId) {
+    return (
+      <Elements
+        stripe={stripePromise}
+        options={{
+          clientSecret,
+          appearance: {
+            theme: 'night',
+            variables: {
+              colorPrimary: '#c9a84c',
+              colorBackground: '#1a1a16',
+              colorText: '#f5f0e8',
+              colorDanger: '#e55353',
+              fontFamily: 'ui-sans-serif, system-ui, sans-serif',
+              borderRadius: '6px',
+            },
+          },
+        }}
+      >
+        <StripePaymentStep
+          donationId={donationId}
+          paymentIntentId={paymentIntentId}
+          amountCents={amountCents}
+          onSuccess={handlePaymentSuccess}
+          onBack={() => setClientSecret(null)}
+          donorDisplayName={displayName ? name : 'Anonymous Friend'}
+          donorEmail={email}
+          isAnonymous={!displayName}
+        />
+      </Elements>
+    );
+  }
+
+  // Step 1: Donor info
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Name & Email */}
+    <form onSubmit={handleContinue} className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="donor-name" className="font-space-mono text-xs uppercase tracking-widest text-muted-foreground mb-2 block">
@@ -108,16 +249,6 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
             className="bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-primary"
           />
         </div>
-      </div>
-
-      {/* Stripe Payment Element placeholder */}
-      <div className="rounded-lg border border-border bg-card p-6 text-center">
-        <p className="font-space-mono text-xs uppercase tracking-widest text-muted-foreground">
-          💳 Payment Element
-        </p>
-        <p className="font-source-serif text-sm text-foreground/50 mt-2 italic">
-          Stripe integration will be connected here
-        </p>
       </div>
 
       {/* Opt-in checkboxes */}
@@ -176,23 +307,20 @@ export function DonationForm({ selectedTier, amountCents, onSuccess }: DonationF
         />
       </div>
 
-      {/* Error */}
       {error && (
         <div className="rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3">
           <p className="font-source-serif text-sm text-destructive">{error}</p>
         </div>
       )}
 
-      {/* Trust signals */}
       <TrustSignals />
 
-      {/* Submit */}
       <button
         type="submit"
         disabled={loading || !selectedTier || amountCents <= 0}
         className="w-full bg-primary text-primary-foreground font-space-mono text-sm uppercase tracking-[0.15em] py-4 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        {loading ? 'Processing…' : `Support KAGNEW — ${amountLabel}`}
+        {loading ? 'Setting up payment…' : `Continue — ${amountLabel}`}
       </button>
     </form>
   );

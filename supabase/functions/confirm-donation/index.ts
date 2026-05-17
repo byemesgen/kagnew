@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import Stripe from "https://esm.sh/stripe@14?target=deno";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -14,8 +15,8 @@ serve(async (req) => {
   try {
     const { donationId, paymentIntentId } = await req.json();
 
-    if (!donationId) {
-      return new Response(JSON.stringify({ error: "Missing donationId" }), {
+    if (!donationId || !paymentIntentId) {
+      return new Response(JSON.stringify({ error: "Missing donationId or paymentIntentId" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -26,13 +27,22 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // TODO: Verify payment with Stripe when enabled
-    // const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!);
-    // const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-    // if (paymentIntent.status !== 'succeeded') {
-    //   throw new Error('Payment not confirmed');
-    // }
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, {
+      apiVersion: "2023-10-16",
+      httpClient: Stripe.createFetchHttpClient(),
+    });
 
+    // Verify payment actually succeeded with Stripe
+    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+
+    if (paymentIntent.status !== "succeeded") {
+      return new Response(
+        JSON.stringify({ error: `Payment not confirmed. Status: ${paymentIntent.status}` }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Mark donation as completed
     const { error: updateError } = await supabase
       .from("donations")
       .update({
