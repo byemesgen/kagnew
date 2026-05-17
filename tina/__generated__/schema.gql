@@ -150,25 +150,55 @@ type PostConnection implements Connection {
   edges: [PostConnectionEdges]
 }
 
+type SiteContentStats {
+  number: String!
+  label: String!
+}
+
 type SiteContentTimelineItems {
   label: String!
   date: String!
   desc: String
 }
 
+type SiteContentFilmmakers {
+  photo: String
+  name: String!
+  title: String!
+  bio: String
+  email: String
+}
+
 type SiteContent implements Node & Document {
   heroTagline: String
   heroSubtitle: String
   heroDescription: String
+  heroVideoUrl: String
+  heroFallbackImage: String
+  stats: [SiteContentStats]
   storyParagraph1: String
   storyParagraph2: String
   storyParagraph3: String
   timelineItems: [SiteContentTimelineItems]
-  heroVideoUrl: String
-  heroFallbackImage: String
+  blockquoteText: String
+  blockquoteCitation: String
+  whyNowTagline: String
+  whyNowHeading: String
+  whyNowParagraph1: String
+  whyNowParagraph2: String
+  whyNowParagraph3: String
+  filmmakers: [SiteContentFilmmakers]
+  contactTagline: String
+  contactHeading: String
+  contactDescription: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input SiteContentStatsFilter {
+  number: StringFilter
+  label: StringFilter
 }
 
 input SiteContentTimelineItemsFilter {
@@ -177,16 +207,36 @@ input SiteContentTimelineItemsFilter {
   desc: StringFilter
 }
 
+input SiteContentFilmmakersFilter {
+  photo: ImageFilter
+  name: StringFilter
+  title: StringFilter
+  bio: StringFilter
+  email: StringFilter
+}
+
 input SiteContentFilter {
   heroTagline: StringFilter
   heroSubtitle: StringFilter
   heroDescription: StringFilter
+  heroVideoUrl: StringFilter
+  heroFallbackImage: ImageFilter
+  stats: SiteContentStatsFilter
   storyParagraph1: StringFilter
   storyParagraph2: StringFilter
   storyParagraph3: StringFilter
   timelineItems: SiteContentTimelineItemsFilter
-  heroVideoUrl: StringFilter
-  heroFallbackImage: ImageFilter
+  blockquoteText: StringFilter
+  blockquoteCitation: StringFilter
+  whyNowTagline: StringFilter
+  whyNowHeading: StringFilter
+  whyNowParagraph1: StringFilter
+  whyNowParagraph2: StringFilter
+  whyNowParagraph3: StringFilter
+  filmmakers: SiteContentFilmmakersFilter
+  contactTagline: StringFilter
+  contactHeading: StringFilter
+  contactDescription: StringFilter
 }
 
 type SiteContentConnectionEdges {
@@ -232,22 +282,47 @@ input PostMutation {
   body: JSON
 }
 
+input SiteContentStatsMutation {
+  number: String
+  label: String
+}
+
 input SiteContentTimelineItemsMutation {
   label: String
   date: String
   desc: String
 }
 
+input SiteContentFilmmakersMutation {
+  photo: String
+  name: String
+  title: String
+  bio: String
+  email: String
+}
+
 input SiteContentMutation {
   heroTagline: String
   heroSubtitle: String
   heroDescription: String
+  heroVideoUrl: String
+  heroFallbackImage: String
+  stats: [SiteContentStatsMutation]
   storyParagraph1: String
   storyParagraph2: String
   storyParagraph3: String
   timelineItems: [SiteContentTimelineItemsMutation]
-  heroVideoUrl: String
-  heroFallbackImage: String
+  blockquoteText: String
+  blockquoteCitation: String
+  whyNowTagline: String
+  whyNowHeading: String
+  whyNowParagraph1: String
+  whyNowParagraph2: String
+  whyNowParagraph3: String
+  filmmakers: [SiteContentFilmmakersMutation]
+  contactTagline: String
+  contactHeading: String
+  contactDescription: String
 }
 
 schema {

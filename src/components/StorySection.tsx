@@ -2,10 +2,13 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 
 interface StorySectionProps {
   content?: {
+    stats?: Array<{ number: string; label: string }> | null;
     storyParagraph1?: string | null;
     storyParagraph2?: string | null;
     storyParagraph3?: string | null;
     timelineItems?: Array<{ label: string; date: string; desc?: string | null }> | null;
+    blockquoteText?: string | null;
+    blockquoteCitation?: string | null;
   } | null;
 }
 
@@ -30,6 +33,9 @@ export function StorySection({ content }: StorySectionProps) {
   const timelineNodes = (content?.timelineItems && content.timelineItems.length > 0)
     ? content.timelineItems
     : defaultTimelineNodes;
+  const displayStats = (content?.stats && content.stats.length > 0) ? content.stats : stats;
+  const blockquoteText = content?.blockquoteText ?? "We were the best fighters. The three Ethiopian battalions fought 253 battles, and no Ethiopian soldier was taken prisoner in the Korean War. That was our Ethiopian motto: 'Never be captured on the war field.'";
+  const blockquoteCitation = content?.blockquoteCitation ?? "— Captain Mamo Habtewold, 81 · Lieutenant, 3rd Kagnew Battalion";
   const p1 = content?.storyParagraph1 ?? "In 1951, Emperor Haile Selassie dispatched thousands of soldiers — drawn from his elite Imperial Bodyguard, the Kebur Zabagna — to fight alongside American-led UN forces in Korea. They were the Kagnew Battalions, and they became one of the most decorated units of the entire war.";
   const p2 = content?.storyParagraph2 ?? "Six thousand Ethiopians crossed the world to fight for the freedom of people they had never met. They suffered 121 killed and 536 wounded in battle. Not a single soldier was ever captured.";
   const p3 = content?.storyParagraph3 ?? "This was the only time in history that an African nation voluntarily sent its own soldiers to fight outside the continent. Their valor is extraordinary. Their story is almost entirely unknown.";
@@ -106,7 +112,7 @@ export function StorySection({ content }: StorySectionProps) {
       <div className="max-w-5xl mx-auto">
         {/* Stats */}
         <div className="scroll-fade grid grid-cols-1 md:grid-cols-4 gap-8 mb-20">
-          {stats.map((stat) => (
+          {displayStats.map((stat) => (
             <div key={stat.number} className="border-t border-primary/40 pt-6 text-center md:text-left">
               <p className="font-playfair text-4xl md:text-5xl font-bold text-primary mb-2">{stat.number}</p>
               <p className="font-source-serif text-sm text-kagnew-muted">{stat.label}</p>
@@ -180,12 +186,10 @@ export function StorySection({ content }: StorySectionProps) {
         {/* Blockquote */}
         <blockquote className="scroll-fade border-l-4 border-primary pl-6 md:pl-10 max-w-3xl mx-auto">
           <p className="font-playfair text-lg md:text-xl italic text-foreground/90 leading-relaxed mb-4">
-            "We were the best fighters. The three Ethiopian battalions fought 253 battles, and no
-            Ethiopian soldier was taken prisoner in the Korean War. That was our Ethiopian motto:
-            'Never be captured on the war field.'"
+            "{blockquoteText}"
           </p>
           <cite className="font-space-mono text-xs uppercase tracking-[0.2em] text-primary not-italic">
-            — Captain Mamo Habtewold, 81 · Lieutenant, 3rd Kagnew Battalion
+            {blockquoteCitation}
           </cite>
         </blockquote>
       </div>

@@ -22,6 +22,13 @@ export const SiteContentPartsFragmentDoc = gql`
   heroTagline
   heroSubtitle
   heroDescription
+  heroVideoUrl
+  heroFallbackImage
+  stats {
+    __typename
+    number
+    label
+  }
   storyParagraph1
   storyParagraph2
   storyParagraph3
@@ -31,8 +38,24 @@ export const SiteContentPartsFragmentDoc = gql`
     date
     desc
   }
-  heroVideoUrl
-  heroFallbackImage
+  blockquoteText
+  blockquoteCitation
+  whyNowTagline
+  whyNowHeading
+  whyNowParagraph1
+  whyNowParagraph2
+  whyNowParagraph3
+  filmmakers {
+    __typename
+    photo
+    name
+    title
+    bio
+    email
+  }
+  contactTagline
+  contactHeading
+  contactDescription
 }
     `;
 export const PostDocument = gql`

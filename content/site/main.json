@@ -2,6 +2,14 @@
   "heroTagline": "A Documentary Film",
   "heroSubtitle": "The Untold Story of Ethiopia's Warriors who Fought in the Korean War",
   "heroDescription": "In 1951, Emperor Haile Selassie sent Ethiopia's finest soldiers to a war most of the world has forgotten. No African nation had ever done this before. Their story has never been fully told — until now.",
+  "heroVideoUrl": "https://player.vimeo.com/video/1174479651?h=a948535b08&background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0",
+  "heroFallbackImage": "",
+  "stats": [
+    { "number": "6,037", "label": "Ethiopian soldiers deployed" },
+    { "number": "253", "label": "Battles fought — zero prisoners taken" },
+    { "number": "0", "label": "Ethiopian soldier casualties" },
+    { "number": "~200", "label": "Survivors still living today" }
+  ],
   "storyParagraph1": "In 1951, Emperor Haile Selassie dispatched thousands of soldiers — drawn from his elite Imperial Bodyguard, the Kebur Zabagna — to fight alongside American-led UN forces in Korea. They were the Kagnew Battalions, and they became one of the most decorated units of the entire war.",
   "storyParagraph2": "Six thousand Ethiopians crossed the world to fight for the freedom of people they had never met. They suffered 121 killed and 536 wounded in battle. Not a single soldier was ever captured.",
   "storyParagraph3": "This was the only time in history that an African nation voluntarily sent its own soldiers to fight outside the continent. Their valor is extraordinary. Their story is almost entirely unknown.",
@@ -14,6 +22,30 @@
     { "label": "Armistice Signed", "date": "July 27, 1953", "desc": "Korean Armistice Agreement signed, war ends" },
     { "label": "Kagnew Legacy Continues", "date": "1954–1965", "desc": "Additional Ethiopian rotations remain in Korea post-war" }
   ],
-  "heroVideoUrl": "https://player.vimeo.com/video/1174479651?h=a948535b08&background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0",
-  "heroFallbackImage": ""
+  "blockquoteText": "We were the best fighters. The three Ethiopian battalions fought 253 battles, and no Ethiopian soldier was taken prisoner in the Korean War. That was our Ethiopian motto: 'Never be captured on the war field.'",
+  "blockquoteCitation": "— Captain Mamo Habtewold, 81 · Lieutenant, 3rd Kagnew Battalion",
+  "whyNowTagline": "The Time Is Now",
+  "whyNowHeading": "Before Their Voices Are Lost Forever",
+  "whyNowParagraph1": "The remaining Kagnew Battalion veterans are aging quickly. Many can no longer speak. Each day we wait, we risk losing their firsthand accounts — forever.",
+  "whyNowParagraph2": "This documentary will, for the first time, tell the Korean War through three perspectives: the Ethiopian Kagnew soldiers, the Korean fighters, and the American servicemen — revealing a shared history that has never been fully seen or heard.",
+  "whyNowParagraph3": "This is our last chance to preserve their legacy. Stories of courage and sacrifice that must not be forgotten.",
+  "filmmakers": [
+    {
+      "photo": "",
+      "name": "Aïda Bekele",
+      "title": "Executive Producer",
+      "bio": "An Ethiopian educator, organizer, and humanitarian — and daughter of Major Bekele Abebe, a Kagnew Battalion soldier. Aida teaches at the International Community School in Ethiopia and is fluent in English, Amharic, French, and Spanish. Her lived connection to this history ensures the film is grounded, authentic, and driven by truth and human dignity.",
+      "email": ""
+    },
+    {
+      "photo": "",
+      "name": "Bemnet Yemesgen",
+      "title": "Director & Producer",
+      "bio": "A filmmaker, photographer, and creative director who has worked with Adidas, USA Today, and the Nike Foundation. When Bemnet discovered that two of his uncles had served in the Korean War, he realized he knew almost nothing about Ethiopia's role — and that almost no one else did either. That discovery became the catalyst for this film.",
+      "email": "bem@thebem.net"
+    }
+  ],
+  "contactTagline": "Stay Informed",
+  "contactHeading": "Be Part of This Story",
+  "contactDescription": "Sign up to receive updates on the film's progress, screening announcements, and ways to support the preservation of this history."
 }

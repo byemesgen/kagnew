@@ -1,25 +1,43 @@
 import aidaPhoto from '@/assets/aida-bekele.jpg';
 import bemnetPhoto from '@/assets/bemnet-yemesgen.jpg';
 
-const filmmakers = [
+const defaultFilmmakers = [
   {
     photo: aidaPhoto,
-    initials: 'AB',
     name: 'Aïda Bekele',
     title: 'Executive Producer',
-    bio: 'An Ethiopian educator, organizer, and humanitarian — and daughter of Major Bekele Abebe, a Kagnew Battalion soldier. Aida teaches at the International Community School in Ethiopia and is fluent in English, Amharic, French, and Spanish. Her lived connection to this history ensures the film is grounded, authentic, and driven by truth and human dignity.',
+    bio: "An Ethiopian educator, organizer, and humanitarian — and daughter of Major Bekele Abebe, a Kagnew Battalion soldier. Aida teaches at the International Community School in Ethiopia and is fluent in English, Amharic, French, and Spanish. Her lived connection to this history ensures the film is grounded, authentic, and driven by truth and human dignity.",
+    email: '',
   },
   {
     photo: bemnetPhoto,
-    initials: 'BY',
     name: 'Bemnet Yemesgen',
     title: 'Director & Producer',
-    bio: 'A filmmaker, photographer, and creative director who has worked with Adidas, USA Today, and the Nike Foundation. When Bemnet discovered that two of his uncles had served in the Korean War, he realized he knew almost nothing about Ethiopia\'s role — and that almost no one else did either. That discovery became the catalyst for this film.',
+    bio: "A filmmaker, photographer, and creative director who has worked with Adidas, USA Today, and the Nike Foundation. When Bemnet discovered that two of his uncles had served in the Korean War, he realized he knew almost nothing about Ethiopia's role — and that almost no one else did either. That discovery became the catalyst for this film.",
     email: 'bem@thebem.net',
   },
 ];
 
-export function FilmmakersSection() {
+interface FilmmakersSectionProps {
+  content?: {
+    filmmakers?: Array<{
+      photo?: string | null;
+      name: string;
+      title: string;
+      bio?: string | null;
+      email?: string | null;
+    }> | null;
+  } | null;
+}
+
+export function FilmmakersSection({ content }: FilmmakersSectionProps) {
+  const filmmakers = (content?.filmmakers && content.filmmakers.length > 0)
+    ? content.filmmakers.map((f, i) => ({
+        ...f,
+        photo: f.photo || defaultFilmmakers[i]?.photo || '',
+      }))
+    : defaultFilmmakers;
+
   return (
     <section id="filmmakers" className="bg-background py-24 md:py-32 px-6">
       <div className="max-w-5xl mx-auto">
@@ -28,26 +46,29 @@ export function FilmmakersSection() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filmmakers.map((person) => (
+          {filmmakers.map((person, i) => (
             <div
-              key={person.initials}
+              key={i}
               className="scroll-fade bg-kagnew-card border border-primary/20 p-8 md:p-10"
             >
-              {/* Header: photo + name/title */}
               <div className="flex flex-col items-center text-center mb-6">
-                <img
-                  src={person.photo}
-                  alt={person.name}
-                  className="w-48 h-48 rounded-full object-cover border-2 border-primary mb-4"
-                />
+                {person.photo && (
+                  <img
+                    src={person.photo}
+                    alt={person.name}
+                    className="w-48 h-48 rounded-full object-cover border-2 border-primary mb-4"
+                  />
+                )}
                 <h3 className="font-playfair text-xl font-bold text-foreground">{person.name}</h3>
                 <p className="font-space-mono text-xs uppercase tracking-[0.2em] text-primary">
                   {person.title}
                 </p>
               </div>
-              <p className="font-source-serif text-sm text-foreground/70 leading-relaxed">
-                {person.bio}
-              </p>
+              {person.bio && (
+                <p className="font-source-serif text-sm text-foreground/70 leading-relaxed">
+                  {person.bio}
+                </p>
+              )}
               {person.email && (
                 <a
                   href={`mailto:${person.email}`}

@@ -1,7 +1,18 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-export function ContactSection() {
+interface ContactSectionProps {
+  content?: {
+    contactTagline?: string | null;
+    contactHeading?: string | null;
+    contactDescription?: string | null;
+  } | null;
+}
+
+export function ContactSection({ content }: ContactSectionProps) {
+  const tagline = content?.contactTagline ?? 'Stay Informed';
+  const heading = content?.contactHeading ?? 'Be Part of This Story';
+  const description = content?.contactDescription ?? "Sign up to receive updates on the film's progress, screening announcements, and ways to support the preservation of this history.";
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -45,14 +56,13 @@ export function ContactSection() {
         ) : (
           <>
             <p className="scroll-fade font-space-mono text-xs uppercase tracking-[0.3em] text-primary mb-4">
-              Stay Informed
+              {tagline}
             </p>
             <h2 className="scroll-fade font-chivo text-3xl md:text-[38px] font-extrabold text-foreground leading-tight mb-4">
-              Be Part of This Story
+              {heading}
             </h2>
             <p className="scroll-fade font-source-serif text-base text-foreground/60 mb-10">
-              Sign up to receive updates on the film's progress, screening announcements, and ways to
-              support the preservation of this history.
+              {description}
             </p>
             <form
               className="scroll-fade flex flex-col sm:flex-row gap-3 mb-4"

@@ -246,6 +246,12 @@ export type PostConnection = Connection & {
   edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
 };
 
+export type SiteContentStats = {
+  __typename?: 'SiteContentStats';
+  number: Scalars['String']['output'];
+  label: Scalars['String']['output'];
+};
+
 export type SiteContentTimelineItems = {
   __typename?: 'SiteContentTimelineItems';
   label: Scalars['String']['output'];
@@ -253,20 +259,46 @@ export type SiteContentTimelineItems = {
   desc?: Maybe<Scalars['String']['output']>;
 };
 
+export type SiteContentFilmmakers = {
+  __typename?: 'SiteContentFilmmakers';
+  photo?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  bio?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+};
+
 export type SiteContent = Node & Document & {
   __typename?: 'SiteContent';
   heroTagline?: Maybe<Scalars['String']['output']>;
   heroSubtitle?: Maybe<Scalars['String']['output']>;
   heroDescription?: Maybe<Scalars['String']['output']>;
+  heroVideoUrl?: Maybe<Scalars['String']['output']>;
+  heroFallbackImage?: Maybe<Scalars['String']['output']>;
+  stats?: Maybe<Array<Maybe<SiteContentStats>>>;
   storyParagraph1?: Maybe<Scalars['String']['output']>;
   storyParagraph2?: Maybe<Scalars['String']['output']>;
   storyParagraph3?: Maybe<Scalars['String']['output']>;
   timelineItems?: Maybe<Array<Maybe<SiteContentTimelineItems>>>;
-  heroVideoUrl?: Maybe<Scalars['String']['output']>;
-  heroFallbackImage?: Maybe<Scalars['String']['output']>;
+  blockquoteText?: Maybe<Scalars['String']['output']>;
+  blockquoteCitation?: Maybe<Scalars['String']['output']>;
+  whyNowTagline?: Maybe<Scalars['String']['output']>;
+  whyNowHeading?: Maybe<Scalars['String']['output']>;
+  whyNowParagraph1?: Maybe<Scalars['String']['output']>;
+  whyNowParagraph2?: Maybe<Scalars['String']['output']>;
+  whyNowParagraph3?: Maybe<Scalars['String']['output']>;
+  filmmakers?: Maybe<Array<Maybe<SiteContentFilmmakers>>>;
+  contactTagline?: Maybe<Scalars['String']['output']>;
+  contactHeading?: Maybe<Scalars['String']['output']>;
+  contactDescription?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type SiteContentStatsFilter = {
+  number?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
 };
 
 export type SiteContentTimelineItemsFilter = {
@@ -275,16 +307,36 @@ export type SiteContentTimelineItemsFilter = {
   desc?: InputMaybe<StringFilter>;
 };
 
+export type SiteContentFilmmakersFilter = {
+  photo?: InputMaybe<ImageFilter>;
+  name?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  bio?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+};
+
 export type SiteContentFilter = {
   heroTagline?: InputMaybe<StringFilter>;
   heroSubtitle?: InputMaybe<StringFilter>;
   heroDescription?: InputMaybe<StringFilter>;
+  heroVideoUrl?: InputMaybe<StringFilter>;
+  heroFallbackImage?: InputMaybe<ImageFilter>;
+  stats?: InputMaybe<SiteContentStatsFilter>;
   storyParagraph1?: InputMaybe<StringFilter>;
   storyParagraph2?: InputMaybe<StringFilter>;
   storyParagraph3?: InputMaybe<StringFilter>;
   timelineItems?: InputMaybe<SiteContentTimelineItemsFilter>;
-  heroVideoUrl?: InputMaybe<StringFilter>;
-  heroFallbackImage?: InputMaybe<ImageFilter>;
+  blockquoteText?: InputMaybe<StringFilter>;
+  blockquoteCitation?: InputMaybe<StringFilter>;
+  whyNowTagline?: InputMaybe<StringFilter>;
+  whyNowHeading?: InputMaybe<StringFilter>;
+  whyNowParagraph1?: InputMaybe<StringFilter>;
+  whyNowParagraph2?: InputMaybe<StringFilter>;
+  whyNowParagraph3?: InputMaybe<StringFilter>;
+  filmmakers?: InputMaybe<SiteContentFilmmakersFilter>;
+  contactTagline?: InputMaybe<StringFilter>;
+  contactHeading?: InputMaybe<StringFilter>;
+  contactDescription?: InputMaybe<StringFilter>;
 };
 
 export type SiteContentConnectionEdges = {
@@ -390,27 +442,52 @@ export type PostMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type SiteContentStatsMutation = {
+  number?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SiteContentTimelineItemsMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['String']['input']>;
   desc?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type SiteContentFilmmakersMutation = {
+  photo?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  bio?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SiteContentMutation = {
   heroTagline?: InputMaybe<Scalars['String']['input']>;
   heroSubtitle?: InputMaybe<Scalars['String']['input']>;
   heroDescription?: InputMaybe<Scalars['String']['input']>;
+  heroVideoUrl?: InputMaybe<Scalars['String']['input']>;
+  heroFallbackImage?: InputMaybe<Scalars['String']['input']>;
+  stats?: InputMaybe<Array<InputMaybe<SiteContentStatsMutation>>>;
   storyParagraph1?: InputMaybe<Scalars['String']['input']>;
   storyParagraph2?: InputMaybe<Scalars['String']['input']>;
   storyParagraph3?: InputMaybe<Scalars['String']['input']>;
   timelineItems?: InputMaybe<Array<InputMaybe<SiteContentTimelineItemsMutation>>>;
-  heroVideoUrl?: InputMaybe<Scalars['String']['input']>;
-  heroFallbackImage?: InputMaybe<Scalars['String']['input']>;
+  blockquoteText?: InputMaybe<Scalars['String']['input']>;
+  blockquoteCitation?: InputMaybe<Scalars['String']['input']>;
+  whyNowTagline?: InputMaybe<Scalars['String']['input']>;
+  whyNowHeading?: InputMaybe<Scalars['String']['input']>;
+  whyNowParagraph1?: InputMaybe<Scalars['String']['input']>;
+  whyNowParagraph2?: InputMaybe<Scalars['String']['input']>;
+  whyNowParagraph3?: InputMaybe<Scalars['String']['input']>;
+  filmmakers?: InputMaybe<Array<InputMaybe<SiteContentFilmmakersMutation>>>;
+  contactTagline?: InputMaybe<Scalars['String']['input']>;
+  contactHeading?: InputMaybe<Scalars['String']['input']>;
+  contactDescription?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PostPartsFragment = { __typename: 'Post', title: string, date: string, author?: string | null, excerpt?: string | null, heroImage?: string | null, body?: any | null };
 
-export type SiteContentPartsFragment = { __typename: 'SiteContent', heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null };
+export type SiteContentPartsFragment = { __typename: 'SiteContent', heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -436,7 +513,7 @@ export type SiteContentQueryVariables = Exact<{
 }>;
 
 
-export type SiteContentQuery = { __typename?: 'Query', siteContent: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null } };
+export type SiteContentQuery = { __typename?: 'Query', siteContent: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null } };
 
 export type SiteContentConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -448,7 +525,7 @@ export type SiteContentConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteContentConnectionQuery = { __typename?: 'Query', siteContentConnection: { __typename?: 'SiteContentConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteContentConnectionEdges', cursor: string, node?: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null } | null } | null> | null } };
+export type SiteContentConnectionQuery = { __typename?: 'Query', siteContentConnection: { __typename?: 'SiteContentConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteContentConnectionEdges', cursor: string, node?: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null } | null } | null> | null } };
 
 export const PostPartsFragmentDoc = gql`
     fragment PostParts on Post {
@@ -467,6 +544,13 @@ export const SiteContentPartsFragmentDoc = gql`
   heroTagline
   heroSubtitle
   heroDescription
+  heroVideoUrl
+  heroFallbackImage
+  stats {
+    __typename
+    number
+    label
+  }
   storyParagraph1
   storyParagraph2
   storyParagraph3
@@ -476,8 +560,24 @@ export const SiteContentPartsFragmentDoc = gql`
     date
     desc
   }
-  heroVideoUrl
-  heroFallbackImage
+  blockquoteText
+  blockquoteCitation
+  whyNowTagline
+  whyNowHeading
+  whyNowParagraph1
+  whyNowParagraph2
+  whyNowParagraph3
+  filmmakers {
+    __typename
+    photo
+    name
+    title
+    bio
+    email
+  }
+  contactTagline
+  contactHeading
+  contactDescription
 }
     `;
 export const PostDocument = gql`
