@@ -1,6 +1,17 @@
 import kagnewLogo from '@/assets/kagnew-logo.svg';
 
-export function HeroSection() {
+interface HeroSectionProps {
+  content?: {
+    heroTagline?: string | null;
+    heroSubtitle?: string | null;
+    heroDescription?: string | null;
+  } | null;
+}
+
+export function HeroSection({ content }: HeroSectionProps) {
+  const tagline = content?.heroTagline ?? 'A Documentary Film';
+  const subtitle = content?.heroSubtitle ?? "The Untold Story of Ethiopia's Warriors who Fought in the Korean War";
+  const description = content?.heroDescription ?? "In 1951, Emperor Haile Selassie sent Ethiopia's finest soldiers to a war most of the world has forgotten. No African nation had ever done this before. Their story has never been fully told — until now.";
   return (
     <section
       id="hero"
@@ -32,7 +43,7 @@ export function HeroSection() {
           className="inline-block font-space-mono text-xs uppercase tracking-[0.35em] text-primary bg-background border border-primary/30 rounded-full px-5 py-1.5 mb-6 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.2s' }}>
           
-          A Documentary Film 
+          {tagline}
         </p>
         <h1
           className="mb-4 opacity-0 animate-fade-up-in flex justify-center"
@@ -43,15 +54,12 @@ export function HeroSection() {
           className="font-source-serif text-lg md:text-[22px] italic text-foreground/70 mb-6 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.6s' }}>
           
-          The Untold Story of Ethiopia's Warriors who Fought in the Korean War 
+          {subtitle}
         </p>
         <p
           className="font-source-serif text-base text-foreground/60 max-w-[540px] mx-auto mb-10 opacity-0 animate-fade-up-in"
           style={{ animationDelay: '0.8s' }}>
-          
-          In 1951, Emperor Haile Selassie sent Ethiopia's finest soldiers to a war most of the world
-          has forgotten. No African nation had ever done this before. Their story has never been fully
-          told — until now.
+          {description}
         </p>
         <div
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 opacity-0 animate-fade-up-in"

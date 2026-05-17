@@ -1,5 +1,13 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 
+interface StorySectionProps {
+  content?: {
+    storyParagraph1?: string | null;
+    storyParagraph2?: string | null;
+    storyParagraph3?: string | null;
+  } | null;
+}
+
 const stats = [
   { number: '6,037', label: 'Ethiopian soldiers deployed' },
   { number: '253', label: 'Battles fought — zero prisoners taken' },
@@ -17,7 +25,10 @@ const timelineNodes = [
   { label: 'Kagnew Legacy Continues', date: '1954–1965', desc: 'Additional Ethiopian rotations remain in Korea post-war' },
 ];
 
-export function StorySection() {
+export function StorySection({ content }: StorySectionProps) {
+  const p1 = content?.storyParagraph1 ?? "In 1951, Emperor Haile Selassie dispatched thousands of soldiers — drawn from his elite Imperial Bodyguard, the Kebur Zabagna — to fight alongside American-led UN forces in Korea. They were the Kagnew Battalions, and they became one of the most decorated units of the entire war.";
+  const p2 = content?.storyParagraph2 ?? "Six thousand Ethiopians crossed the world to fight for the freedom of people they had never met. They suffered 121 killed and 536 wounded in battle. Not a single soldier was ever captured.";
+  const p3 = content?.storyParagraph3 ?? "This was the only time in history that an African nation voluntarily sent its own soldiers to fight outside the continent. Their valor is extraordinary. Their story is almost entirely unknown.";
   const scrollRef = useRef<HTMLDivElement>(null);
   const timelineWrapperRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -107,22 +118,9 @@ export function StorySection() {
             </p>
           </div>
           <div className="md:w-2/3 font-source-serif text-foreground/80 leading-relaxed space-y-6 text-base">
-            <p>
-              In 1951, Emperor Haile Selassie dispatched thousands of soldiers — drawn from his elite
-              Imperial Bodyguard, the Kebur Zabagna — to fight alongside American-led UN forces in
-              Korea. They were the Kagnew Battalions, and they became one of the most decorated units
-              of the entire war.
-            </p>
-            <p>
-              Six thousand Ethiopians crossed the world to fight for the freedom of people they had
-              never met. They suffered 121 killed and 536 wounded in battle. Not a single soldier was
-              ever captured.
-            </p>
-            <p>
-              This was the only time in history that an African nation voluntarily sent its own
-              soldiers to fight outside the continent. Their valor is extraordinary. Their story is
-              almost entirely unknown.
-            </p>
+            <p>{p1}</p>
+            <p>{p2}</p>
+            <p>{p3}</p>
           </div>
         </div>
       </div>
