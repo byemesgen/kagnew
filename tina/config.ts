@@ -110,6 +110,20 @@ export default defineConfig({
             ui: { component: "textarea" },
           },
           {
+            type: "object",
+            name: "timelineItems",
+            label: "Timeline Items",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.label }),
+            },
+            fields: [
+              { type: "string", name: "label", label: "Title (e.g. Conflict Begins)", required: true },
+              { type: "string", name: "date", label: "Date (e.g. June 25, 1950)", required: true },
+              { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
+            ],
+          },
+          {
             type: "string",
             name: "heroVideoUrl",
             label: "Hero Background Video (Vimeo embed URL)",

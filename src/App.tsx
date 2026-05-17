@@ -21,6 +21,11 @@ const SITE_CONTENT_QUERY = `
       heroDescription
       heroVideoUrl
       heroFallbackImage
+      timelineItems {
+        label
+        date
+        desc
+      }
       storyParagraph1
       storyParagraph2
       storyParagraph3
@@ -36,6 +41,7 @@ type SiteContent = {
   heroDescription?: string | null;
   heroVideoUrl?: string | null;
   heroFallbackImage?: string | null;
+  timelineItems?: Array<{ label: string; date: string; desc?: string | null }> | null;
   storyParagraph1?: string | null;
   storyParagraph2?: string | null;
   storyParagraph3?: string | null;

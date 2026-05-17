@@ -5,6 +5,15 @@
   "storyParagraph1": "In 1951, Emperor Haile Selassie dispatched thousands of soldiers — drawn from his elite Imperial Bodyguard, the Kebur Zabagna — to fight alongside American-led UN forces in Korea. They were the Kagnew Battalions, and they became one of the most decorated units of the entire war.",
   "storyParagraph2": "Six thousand Ethiopians crossed the world to fight for the freedom of people they had never met. They suffered 121 killed and 536 wounded in battle. Not a single soldier was ever captured.",
   "storyParagraph3": "This was the only time in history that an African nation voluntarily sent its own soldiers to fight outside the continent. Their valor is extraordinary. Their story is almost entirely unknown.",
+  "timelineItems": [
+    { "label": "Conflict Begins", "date": "June 25, 1950", "desc": "North Korea invades South Korea" },
+    { "label": "UN Intervention", "date": "September 1950", "desc": "U.S.-led UN forces enter the war" },
+    { "label": "Ethiopia Deploys", "date": "May 1951", "desc": "First Kagnew Battalion arrives in Korea" },
+    { "label": "Kagnew in Combat", "date": "1951–1953", "desc": "Ethiopian troops fight in 250+ battles alongside UN forces" },
+    { "label": "Major Engagements", "date": "1952", "desc": "Kagnew Battalion fights in key battles including Old Baldy" },
+    { "label": "Armistice Signed", "date": "July 27, 1953", "desc": "Korean Armistice Agreement signed, war ends" },
+    { "label": "Kagnew Legacy Continues", "date": "1954–1965", "desc": "Additional Ethiopian rotations remain in Korea post-war" }
+  ],
   "heroVideoUrl": "https://player.vimeo.com/video/1174479651?h=a948535b08&background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0",
   "heroFallbackImage": ""
 }

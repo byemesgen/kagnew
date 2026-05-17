@@ -5,6 +5,7 @@ interface StorySectionProps {
     storyParagraph1?: string | null;
     storyParagraph2?: string | null;
     storyParagraph3?: string | null;
+    timelineItems?: Array<{ label: string; date: string; desc?: string | null }> | null;
   } | null;
 }
 
@@ -15,7 +16,7 @@ const stats = [
   { number: '~200', label: 'Survivors still living today' },
 ];
 
-const timelineNodes = [
+const defaultTimelineNodes = [
   { label: 'Conflict Begins', date: 'June 25, 1950', desc: 'North Korea invades South Korea' },
   { label: 'UN Intervention', date: 'September 1950', desc: 'U.S.-led UN forces enter the war' },
   { label: 'Ethiopia Deploys', date: 'May 1951', desc: 'First Kagnew Battalion arrives in Korea' },
@@ -26,6 +27,9 @@ const timelineNodes = [
 ];
 
 export function StorySection({ content }: StorySectionProps) {
+  const timelineNodes = (content?.timelineItems && content.timelineItems.length > 0)
+    ? content.timelineItems
+    : defaultTimelineNodes;
   const p1 = content?.storyParagraph1 ?? "In 1951, Emperor Haile Selassie dispatched thousands of soldiers — drawn from his elite Imperial Bodyguard, the Kebur Zabagna — to fight alongside American-led UN forces in Korea. They were the Kagnew Battalions, and they became one of the most decorated units of the entire war.";
   const p2 = content?.storyParagraph2 ?? "Six thousand Ethiopians crossed the world to fight for the freedom of people they had never met. They suffered 121 killed and 536 wounded in battle. Not a single soldier was ever captured.";
   const p3 = content?.storyParagraph3 ?? "This was the only time in history that an African nation voluntarily sent its own soldiers to fight outside the continent. Their valor is extraordinary. Their story is almost entirely unknown.";

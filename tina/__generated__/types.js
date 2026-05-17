@@ -25,6 +25,12 @@ export const SiteContentPartsFragmentDoc = gql`
   storyParagraph1
   storyParagraph2
   storyParagraph3
+  timelineItems {
+    __typename
+    label
+    date
+    desc
+  }
   heroVideoUrl
   heroFallbackImage
 }
