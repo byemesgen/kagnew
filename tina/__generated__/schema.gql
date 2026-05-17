@@ -157,6 +157,8 @@ type SiteContent implements Node & Document {
   storyParagraph1: String
   storyParagraph2: String
   storyParagraph3: String
+  heroVideoUrl: String
+  heroFallbackImage: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -169,6 +171,8 @@ input SiteContentFilter {
   storyParagraph1: StringFilter
   storyParagraph2: StringFilter
   storyParagraph3: StringFilter
+  heroVideoUrl: StringFilter
+  heroFallbackImage: ImageFilter
 }
 
 type SiteContentConnectionEdges {
@@ -221,6 +225,8 @@ input SiteContentMutation {
   storyParagraph1: String
   storyParagraph2: String
   storyParagraph3: String
+  heroVideoUrl: String
+  heroFallbackImage: String
 }
 
 schema {

@@ -19,6 +19,8 @@ const SITE_CONTENT_QUERY = `
       heroTagline
       heroSubtitle
       heroDescription
+      heroVideoUrl
+      heroFallbackImage
       storyParagraph1
       storyParagraph2
       storyParagraph3
@@ -32,6 +34,8 @@ type SiteContent = {
   heroTagline?: string | null;
   heroSubtitle?: string | null;
   heroDescription?: string | null;
+  heroVideoUrl?: string | null;
+  heroFallbackImage?: string | null;
   storyParagraph1?: string | null;
   storyParagraph2?: string | null;
   storyParagraph3?: string | null;

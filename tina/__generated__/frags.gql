@@ -16,4 +16,6 @@ fragment SiteContentParts on SiteContent {
   storyParagraph1
   storyParagraph2
   storyParagraph3
+  heroVideoUrl
+  heroFallbackImage
 }

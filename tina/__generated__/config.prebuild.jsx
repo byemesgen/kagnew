@@ -105,6 +105,18 @@ var config_default = defineConfig({
             name: "storyParagraph3",
             label: "Story Paragraph 3",
             ui: { component: "textarea" }
+          },
+          {
+            type: "string",
+            name: "heroVideoUrl",
+            label: "Hero Background Video (Vimeo embed URL)",
+            description: "Paste the full Vimeo player embed URL, e.g. https://player.vimeo.com/video/123456?background=1&autoplay=1&loop=1&muted=1"
+          },
+          {
+            type: "image",
+            name: "heroFallbackImage",
+            label: "Hero Fallback Image",
+            description: "Shown if the video fails to load"
           }
         ]
       }

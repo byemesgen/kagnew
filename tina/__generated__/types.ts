@@ -254,6 +254,8 @@ export type SiteContent = Node & Document & {
   storyParagraph1?: Maybe<Scalars['String']['output']>;
   storyParagraph2?: Maybe<Scalars['String']['output']>;
   storyParagraph3?: Maybe<Scalars['String']['output']>;
+  heroVideoUrl?: Maybe<Scalars['String']['output']>;
+  heroFallbackImage?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -266,6 +268,8 @@ export type SiteContentFilter = {
   storyParagraph1?: InputMaybe<StringFilter>;
   storyParagraph2?: InputMaybe<StringFilter>;
   storyParagraph3?: InputMaybe<StringFilter>;
+  heroVideoUrl?: InputMaybe<StringFilter>;
+  heroFallbackImage?: InputMaybe<ImageFilter>;
 };
 
 export type SiteContentConnectionEdges = {
@@ -378,11 +382,13 @@ export type SiteContentMutation = {
   storyParagraph1?: InputMaybe<Scalars['String']['input']>;
   storyParagraph2?: InputMaybe<Scalars['String']['input']>;
   storyParagraph3?: InputMaybe<Scalars['String']['input']>;
+  heroVideoUrl?: InputMaybe<Scalars['String']['input']>;
+  heroFallbackImage?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PostPartsFragment = { __typename: 'Post', title: string, date: string, author?: string | null, excerpt?: string | null, heroImage?: string | null, body?: any | null };
 
-export type SiteContentPartsFragment = { __typename: 'SiteContent', heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null };
+export type SiteContentPartsFragment = { __typename: 'SiteContent', heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -408,7 +414,7 @@ export type SiteContentQueryVariables = Exact<{
 }>;
 
 
-export type SiteContentQuery = { __typename?: 'Query', siteContent: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type SiteContentQuery = { __typename?: 'Query', siteContent: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type SiteContentConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -420,7 +426,7 @@ export type SiteContentConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteContentConnectionQuery = { __typename?: 'Query', siteContentConnection: { __typename?: 'SiteContentConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteContentConnectionEdges', cursor: string, node?: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type SiteContentConnectionQuery = { __typename?: 'Query', siteContentConnection: { __typename?: 'SiteContentConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteContentConnectionEdges', cursor: string, node?: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const PostPartsFragmentDoc = gql`
     fragment PostParts on Post {
@@ -442,6 +448,8 @@ export const SiteContentPartsFragmentDoc = gql`
   storyParagraph1
   storyParagraph2
   storyParagraph3
+  heroVideoUrl
+  heroFallbackImage
 }
     `;
 export const PostDocument = gql`
@@ -620,7 +628,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.4/content/d61bf053-244c-4ef8-8ee9-6fa6175fa836/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )
