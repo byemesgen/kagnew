@@ -11,6 +11,8 @@ const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
 const AdminDonations = lazy(() => import("./pages/AdminDonations.tsx"));
 const AdminResetPassword = lazy(() => import("./pages/AdminResetPassword.tsx"));
 const AdminRoute = lazy(() => import("./components/admin/AdminRoute.tsx").then(m => ({ default: m.AdminRoute })));
+const BlogList = lazy(() => import("./pages/BlogList.tsx"));
+const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
 
 const Loading = () => (
   <div className="min-h-screen bg-background flex items-center justify-center">
@@ -26,6 +28,8 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/donate" element={<DonatePage />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/reset-password" element={<AdminResetPassword />} />
         <Route

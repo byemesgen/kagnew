@@ -6,6 +6,7 @@ const navLinks = [
   { label: 'Story', hash: '#story' },
   { label: 'Why Now', hash: '#why-now' },
   { label: 'Filmmakers', hash: '#filmmakers' },
+  { label: 'Blog', hash: '/blog', isPage: true },
   { label: 'Contact', hash: '#contact' },
 ];
 
@@ -21,8 +22,12 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNavClick = useCallback((hash: string) => {
+  const handleNavClick = useCallback((hash: string, isPage?: boolean) => {
     setMenuOpen(false);
+    if (isPage) {
+      navigate(hash);
+      return;
+    }
     if (location.pathname === '/') {
       const el = document.querySelector(hash);
       el?.scrollIntoView({ behavior: 'smooth' });
@@ -48,7 +53,7 @@ export function Navigation() {
             {navLinks.map((link) => (
               <button
                 key={link.hash}
-                onClick={() => handleNavClick(link.hash)}
+                onClick={() => handleNavClick(link.hash, link.isPage)}
                 className="font-space-mono text-xs uppercase tracking-[0.2em] text-foreground/70 hover:text-primary transition-colors"
               >
                 {link.label}
@@ -84,7 +89,7 @@ export function Navigation() {
             {navLinks.map((link) => (
               <button
                 key={link.hash}
-                onClick={() => handleNavClick(link.hash)}
+                onClick={() => handleNavClick(link.hash, link.isPage)}
                 className="font-space-mono text-sm uppercase tracking-[0.25em] text-foreground/80 hover:text-primary transition-colors"
               >
                 {link.label}
