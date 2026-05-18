@@ -9,9 +9,11 @@ import { SocialProofTicker } from '@/components/donate/SocialProofTicker';
 import { ExitIntentBar } from '@/components/donate/ExitIntentBar';
 import { MobileStickyDonate } from '@/components/donate/MobileStickyDonate';
 import { Footer } from '@/components/Footer';
+import { useTinaSiteContent } from '@/hooks/useTinaSiteContent';
 
 export default function DonatePage() {
   useEffect(() => { document.title = 'Donate — Support the KAGNEW Documentary'; }, []);
+  const content = useTinaSiteContent();
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [amountCents, setAmountCents] = useState(0);
   const [customAmount, setCustomAmount] = useState('');
@@ -40,16 +42,15 @@ export default function DonatePage() {
               {/* Hero copy */}
               <div id="donate-hero" className="text-center mb-14">
                 <p className="font-space-mono text-xs uppercase tracking-[0.35em] text-primary mb-4">
-                  Support the Film
+                  {content.donateTagline ?? 'Support the Film'}
                 </p>
                 <h1 className="font-source-serif text-4xl md:text-5xl text-foreground mb-4">
-                  Every Story Needs a Witness.
+                  {content.donateHeading ?? 'Every Story Needs a Witness.'}
                   <br />
-                  <span className="italic text-primary">Be One.</span>
+                  <span className="italic text-primary">{content.donateHeadingItalic ?? 'Be One.'}</span>
                 </h1>
                 <p className="font-source-serif text-base text-foreground/60 max-w-xl mx-auto">
-                  Your contribution directly funds production — archival research, veteran interviews, 
-                  and bringing this untold chapter of history to screens worldwide.
+                  {content.donateDescription ?? 'Your contribution directly funds production — archival research, veteran interviews, and bringing this untold chapter of history to screens worldwide.'}
                 </p>
               </div>
 
@@ -63,6 +64,7 @@ export default function DonatePage() {
                   customAmount={customAmount}
                   onSelectTier={handleSelectTier}
                   onCustomAmountChange={setCustomAmount}
+                  tiers={content.tiers ?? undefined}
                 />
               </div>
 

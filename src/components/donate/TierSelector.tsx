@@ -1,21 +1,23 @@
-const TIERS = [
+const DEFAULT_TIERS = [
   { id: 'supporter', name: 'Supporter', amount: 25, description: 'Help us reach the next veteran' },
   { id: 'advocate', name: 'Advocate', amount: 50, description: 'Fund a day of archival research' },
   { id: 'producer', name: 'Producer', amount: 100, description: 'Put a crew member on set for a day' },
   { id: 'executive', name: 'Executive', amount: 250, description: 'Fund an interview shoot day' },
-] as const;
+];
 
 interface TierSelectorProps {
   selectedTier: string | null;
   customAmount: string;
   onSelectTier: (tier: string, amountCents: number) => void;
   onCustomAmountChange: (value: string) => void;
+  tiers?: Array<{ id: string; name: string; amount: number; description?: string | null }>;
 }
 
-export function TierSelector({ selectedTier, customAmount, onSelectTier, onCustomAmountChange }: TierSelectorProps) {
+export function TierSelector({ selectedTier, customAmount, onSelectTier, onCustomAmountChange, tiers }: TierSelectorProps) {
+  const activeTiers = (tiers && tiers.length > 0) ? tiers : DEFAULT_TIERS;
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-      {TIERS.map((tier) => (
+      {activeTiers.map((tier) => (
         <button
           key={tier.id}
           type="button"

@@ -114,6 +114,25 @@ export default defineConfig({
           { type: "string", name: "contactTagline", label: "Contact — Tagline" },
           { type: "string", name: "contactHeading", label: "Contact — Heading" },
           { type: "string", name: "contactDescription", label: "Contact — Description", ui: { component: "textarea" } },
+
+          // ─── DONATE PAGE ────────────────────────────────────────
+          { type: "string", name: "donateTagline", label: "Donate — Tagline" },
+          { type: "string", name: "donateHeading", label: "Donate — Heading" },
+          { type: "string", name: "donateHeadingItalic", label: "Donate — Heading Italic Part" },
+          { type: "string", name: "donateDescription", label: "Donate — Description", ui: { component: "textarea" } },
+          {
+            type: "object",
+            name: "tiers",
+            label: "Donate — Tiers",
+            list: true,
+            ui: { itemProps: (item) => ({ label: `${item?.name} — $${item?.amount}` }) },
+            fields: [
+              { type: "string", name: "id", label: "ID (do not change)", required: true },
+              { type: "string", name: "name", label: "Tier Name", required: true },
+              { type: "number", name: "amount", label: "Amount ($)", required: true },
+              { type: "string", name: "description", label: "Description" },
+            ],
+          },
         ],
       },
     ],

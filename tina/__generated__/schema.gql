@@ -169,6 +169,13 @@ type SiteContentFilmmakers {
   email: String
 }
 
+type SiteContentTiers {
+  id: String!
+  name: String!
+  amount: Float!
+  description: String
+}
+
 type SiteContent implements Node & Document {
   heroTagline: String
   heroSubtitle: String
@@ -191,6 +198,11 @@ type SiteContent implements Node & Document {
   contactTagline: String
   contactHeading: String
   contactDescription: String
+  donateTagline: String
+  donateHeading: String
+  donateHeadingItalic: String
+  donateDescription: String
+  tiers: [SiteContentTiers]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -215,6 +227,23 @@ input SiteContentFilmmakersFilter {
   email: StringFilter
 }
 
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
+input SiteContentTiersFilter {
+  id: StringFilter
+  name: StringFilter
+  amount: NumberFilter
+  description: StringFilter
+}
+
 input SiteContentFilter {
   heroTagline: StringFilter
   heroSubtitle: StringFilter
@@ -237,6 +266,11 @@ input SiteContentFilter {
   contactTagline: StringFilter
   contactHeading: StringFilter
   contactDescription: StringFilter
+  donateTagline: StringFilter
+  donateHeading: StringFilter
+  donateHeadingItalic: StringFilter
+  donateDescription: StringFilter
+  tiers: SiteContentTiersFilter
 }
 
 type SiteContentConnectionEdges {
@@ -301,6 +335,13 @@ input SiteContentFilmmakersMutation {
   email: String
 }
 
+input SiteContentTiersMutation {
+  id: String
+  name: String
+  amount: Float
+  description: String
+}
+
 input SiteContentMutation {
   heroTagline: String
   heroSubtitle: String
@@ -323,6 +364,11 @@ input SiteContentMutation {
   contactTagline: String
   contactHeading: String
   contactDescription: String
+  donateTagline: String
+  donateHeading: String
+  donateHeadingItalic: String
+  donateDescription: String
+  tiers: [SiteContentTiersMutation]
 }
 
 schema {

@@ -47,5 +47,15 @@
   ],
   "contactTagline": "Stay Informed",
   "contactHeading": "Be Part of This Story",
-  "contactDescription": "Sign up to receive updates on the film's progress, screening announcements, and ways to support the preservation of this history."
+  "contactDescription": "Sign up to receive updates on the film's progress, screening announcements, and ways to support the preservation of this history.",
+  "donateTagline": "Support the Film",
+  "donateHeading": "Every Story Needs a Witness.",
+  "donateHeadingItalic": "Be One.",
+  "donateDescription": "Your contribution directly funds production — archival research, veteran interviews, and bringing this untold chapter of history to screens worldwide.",
+  "tiers": [
+    { "id": "supporter", "name": "Supporter", "amount": 25, "description": "Help us reach the next veteran" },
+    { "id": "advocate", "name": "Advocate", "amount": 50, "description": "Fund a day of archival research" },
+    { "id": "producer", "name": "Producer", "amount": 100, "description": "Put a crew member on set for a day" },
+    { "id": "executive", "name": "Executive", "amount": 250, "description": "Fund an interview shoot day" }
+  ]
 }

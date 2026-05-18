@@ -47,4 +47,15 @@ fragment SiteContentParts on SiteContent {
   contactTagline
   contactHeading
   contactDescription
+  donateTagline
+  donateHeading
+  donateHeadingItalic
+  donateDescription
+  tiers {
+    __typename
+    id
+    name
+    amount
+    description
+  }
 }

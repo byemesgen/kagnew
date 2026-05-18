@@ -56,6 +56,17 @@ export const SiteContentPartsFragmentDoc = gql`
   contactTagline
   contactHeading
   contactDescription
+  donateTagline
+  donateHeading
+  donateHeadingItalic
+  donateDescription
+  tiers {
+    __typename
+    id
+    name
+    amount
+    description
+  }
 }
     `;
 export const PostDocument = gql`
