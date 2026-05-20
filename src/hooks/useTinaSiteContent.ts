@@ -12,6 +12,7 @@ export type SiteContent = {
   heroVideoUrl?: string | null;
   heroFallbackImage?: string | null;
   stats?: Array<{ number: string; label: string }> | null;
+  storyHeading?: string | null;
   storyParagraph1?: string | null;
   storyParagraph2?: string | null;
   storyParagraph3?: string | null;
@@ -39,7 +40,7 @@ const SITE_CONTENT_QUERY = `
     siteContent(relativePath: $relativePath) {
       heroTagline heroSubtitle heroDescription heroVideoUrl heroFallbackImage
       stats { number label }
-      storyParagraph1 storyParagraph2 storyParagraph3
+      storyHeading storyParagraph1 storyParagraph2 storyParagraph3
       timelineItems { label date desc }
       blockquoteText blockquoteCitation
       whyNowTagline whyNowHeading

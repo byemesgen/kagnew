@@ -3,6 +3,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 interface StorySectionProps {
   content?: {
     stats?: Array<{ number: string; label: string }> | null;
+    storyHeading?: string | null;
     storyParagraph1?: string | null;
     storyParagraph2?: string | null;
     storyParagraph3?: string | null;
@@ -124,7 +125,7 @@ export function StorySection({ content }: StorySectionProps) {
         <div className="scroll-fade flex flex-col md:flex-row gap-8 md:gap-16 mb-20">
           <div className="md:w-1/3">
             <p className="font-space-mono text-xs uppercase tracking-[0.25em] text-primary">
-              The Kagnew Battalion
+              {content?.storyHeading ?? 'The Kagnew Battalion'}
             </p>
           </div>
           <div className="md:w-2/3 font-source-serif text-foreground/80 leading-relaxed space-y-6 text-base">

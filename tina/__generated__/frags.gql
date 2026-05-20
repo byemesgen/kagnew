@@ -20,6 +20,7 @@ fragment SiteContentParts on SiteContent {
     number
     label
   }
+  storyHeading
   storyParagraph1
   storyParagraph2
   storyParagraph3

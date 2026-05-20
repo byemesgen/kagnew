@@ -69,6 +69,7 @@ export default defineConfig({
               { type: "string", name: "label", label: "Label", required: true },
             ],
           },
+          { type: "string", name: "storyHeading", label: "Story — Section Heading (e.g. The Kagnew Battalion)" },
           { type: "string", name: "storyParagraph1", label: "Story — Paragraph 1", ui: { component: "textarea" } },
           { type: "string", name: "storyParagraph2", label: "Story — Paragraph 2", ui: { component: "textarea" } },
           { type: "string", name: "storyParagraph3", label: "Story — Paragraph 3", ui: { component: "textarea" } },

@@ -29,6 +29,7 @@ export const SiteContentPartsFragmentDoc = gql`
     number
     label
   }
+  storyHeading
   storyParagraph1
   storyParagraph2
   storyParagraph3

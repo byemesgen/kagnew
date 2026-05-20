@@ -65,6 +65,7 @@ var config_default = defineConfig({
               { type: "string", name: "label", label: "Label", required: true }
             ]
           },
+          { type: "string", name: "storyHeading", label: "Story \u2014 Section Heading (e.g. The Kagnew Battalion)" },
           { type: "string", name: "storyParagraph1", label: "Story \u2014 Paragraph 1", ui: { component: "textarea" } },
           { type: "string", name: "storyParagraph2", label: "Story \u2014 Paragraph 2", ui: { component: "textarea" } },
           { type: "string", name: "storyParagraph3", label: "Story \u2014 Paragraph 3", ui: { component: "textarea" } },

@@ -183,6 +183,7 @@ type SiteContent implements Node & Document {
   heroVideoUrl: String
   heroFallbackImage: String
   stats: [SiteContentStats]
+  storyHeading: String
   storyParagraph1: String
   storyParagraph2: String
   storyParagraph3: String
@@ -251,6 +252,7 @@ input SiteContentFilter {
   heroVideoUrl: StringFilter
   heroFallbackImage: ImageFilter
   stats: SiteContentStatsFilter
+  storyHeading: StringFilter
   storyParagraph1: StringFilter
   storyParagraph2: StringFilter
   storyParagraph3: StringFilter
@@ -349,6 +351,7 @@ input SiteContentMutation {
   heroVideoUrl: String
   heroFallbackImage: String
   stats: [SiteContentStatsMutation]
+  storyHeading: String
   storyParagraph1: String
   storyParagraph2: String
   storyParagraph3: String

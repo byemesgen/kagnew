@@ -284,6 +284,7 @@ export type SiteContent = Node & Document & {
   heroVideoUrl?: Maybe<Scalars['String']['output']>;
   heroFallbackImage?: Maybe<Scalars['String']['output']>;
   stats?: Maybe<Array<Maybe<SiteContentStats>>>;
+  storyHeading?: Maybe<Scalars['String']['output']>;
   storyParagraph1?: Maybe<Scalars['String']['output']>;
   storyParagraph2?: Maybe<Scalars['String']['output']>;
   storyParagraph3?: Maybe<Scalars['String']['output']>;
@@ -352,6 +353,7 @@ export type SiteContentFilter = {
   heroVideoUrl?: InputMaybe<StringFilter>;
   heroFallbackImage?: InputMaybe<ImageFilter>;
   stats?: InputMaybe<SiteContentStatsFilter>;
+  storyHeading?: InputMaybe<StringFilter>;
   storyParagraph1?: InputMaybe<StringFilter>;
   storyParagraph2?: InputMaybe<StringFilter>;
   storyParagraph3?: InputMaybe<StringFilter>;
@@ -510,6 +512,7 @@ export type SiteContentMutation = {
   heroVideoUrl?: InputMaybe<Scalars['String']['input']>;
   heroFallbackImage?: InputMaybe<Scalars['String']['input']>;
   stats?: InputMaybe<Array<InputMaybe<SiteContentStatsMutation>>>;
+  storyHeading?: InputMaybe<Scalars['String']['input']>;
   storyParagraph1?: InputMaybe<Scalars['String']['input']>;
   storyParagraph2?: InputMaybe<Scalars['String']['input']>;
   storyParagraph3?: InputMaybe<Scalars['String']['input']>;
@@ -534,7 +537,7 @@ export type SiteContentMutation = {
 
 export type PostPartsFragment = { __typename: 'Post', title: string, date: string, author?: string | null, excerpt?: string | null, heroImage?: string | null, body?: any | null };
 
-export type SiteContentPartsFragment = { __typename: 'SiteContent', heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, donateTagline?: string | null, donateHeading?: string | null, donateHeadingItalic?: string | null, donateDescription?: string | null, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null, tiers?: Array<{ __typename: 'SiteContentTiers', id: string, name: string, amount: number, description?: string | null } | null> | null };
+export type SiteContentPartsFragment = { __typename: 'SiteContent', heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, donateTagline?: string | null, donateHeading?: string | null, donateHeadingItalic?: string | null, donateDescription?: string | null, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null, tiers?: Array<{ __typename: 'SiteContentTiers', id: string, name: string, amount: number, description?: string | null } | null> | null };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -560,7 +563,7 @@ export type SiteContentQueryVariables = Exact<{
 }>;
 
 
-export type SiteContentQuery = { __typename?: 'Query', siteContent: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, donateTagline?: string | null, donateHeading?: string | null, donateHeadingItalic?: string | null, donateDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null, tiers?: Array<{ __typename: 'SiteContentTiers', id: string, name: string, amount: number, description?: string | null } | null> | null } };
+export type SiteContentQuery = { __typename?: 'Query', siteContent: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, donateTagline?: string | null, donateHeading?: string | null, donateHeadingItalic?: string | null, donateDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null, tiers?: Array<{ __typename: 'SiteContentTiers', id: string, name: string, amount: number, description?: string | null } | null> | null } };
 
 export type SiteContentConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -572,7 +575,7 @@ export type SiteContentConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteContentConnectionQuery = { __typename?: 'Query', siteContentConnection: { __typename?: 'SiteContentConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteContentConnectionEdges', cursor: string, node?: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, donateTagline?: string | null, donateHeading?: string | null, donateHeadingItalic?: string | null, donateDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null, tiers?: Array<{ __typename: 'SiteContentTiers', id: string, name: string, amount: number, description?: string | null } | null> | null } | null } | null> | null } };
+export type SiteContentConnectionQuery = { __typename?: 'Query', siteContentConnection: { __typename?: 'SiteContentConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteContentConnectionEdges', cursor: string, node?: { __typename: 'SiteContent', id: string, heroTagline?: string | null, heroSubtitle?: string | null, heroDescription?: string | null, heroVideoUrl?: string | null, heroFallbackImage?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, storyParagraph3?: string | null, blockquoteText?: string | null, blockquoteCitation?: string | null, whyNowTagline?: string | null, whyNowHeading?: string | null, whyNowParagraph1?: string | null, whyNowParagraph2?: string | null, whyNowParagraph3?: string | null, contactTagline?: string | null, contactHeading?: string | null, contactDescription?: string | null, donateTagline?: string | null, donateHeading?: string | null, donateHeadingItalic?: string | null, donateDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats?: Array<{ __typename: 'SiteContentStats', number: string, label: string } | null> | null, timelineItems?: Array<{ __typename: 'SiteContentTimelineItems', label: string, date: string, desc?: string | null } | null> | null, filmmakers?: Array<{ __typename: 'SiteContentFilmmakers', photo?: string | null, name: string, title: string, bio?: string | null, email?: string | null } | null> | null, tiers?: Array<{ __typename: 'SiteContentTiers', id: string, name: string, amount: number, description?: string | null } | null> | null } | null } | null> | null } };
 
 export const PostPartsFragmentDoc = gql`
     fragment PostParts on Post {
@@ -598,6 +601,7 @@ export const SiteContentPartsFragmentDoc = gql`
     number
     label
   }
+  storyHeading
   storyParagraph1
   storyParagraph2
   storyParagraph3
